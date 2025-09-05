@@ -13,6 +13,7 @@ function App() {
     <>
     <Router>
       <Nav />
+      <div className="h-40"></div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About/>}/>
