@@ -1,0 +1,102 @@
+.contact-wrapper {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 25px;
+  background: #e0f7ff;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #c0e7ff;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #f0fcff;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group textarea {
+  resize: none;
+  height: 80px;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #66d6ff;
+  background: #ffffff;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #7aaed0;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group textarea:focus + label,
+.input-group textarea:not(:placeholder-shown) + label {
+  top: -8px;
+  left: 10px;
+  font-size: 0.75rem;
+  color: #009edb;
+  background: #e0f7ff;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 0;
+  border: none;
+  background: #66d6ff;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+button:hover {
+  background: #33bfff;
+  transform: scale(1.03);
+}
+
+.success-msg {
+  margin-top: 8px;
+  color: #009edb;
+  font-weight: 600;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 450px) {
+  .contact-wrapper {
+    margin: 20px;
+    padding: 20px;
+  }
+}
