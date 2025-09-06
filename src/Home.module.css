@@ -1,0 +1,745 @@
+/* Home Page Styles */
+.homeContainer {
+  padding-top: 8rem;
+}
+
+.mainSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  min-height: 60vh;
+}
+
+/* Left Content */
+.leftContent {
+  flex: 1;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: #334155;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Button Container */
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Primary Button - Book Appointment */
+.primaryButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #fb923c, #ec4899);
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(251, 146, 60, 0.3);
+}
+
+.primaryButton:hover {
+  background: linear-gradient(to right, #df1414, #db2777);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(251, 146, 60, 0.4);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+}
+
+/* Secondary Button - Emergency */
+.secondaryButton {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(to right, #e70d60, #a71a91);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.secondaryButton:hover {
+  background: linear-gradient(to right, #e71815, #c9225f);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(229, 11, 116, 0.4);
+}
+
+.secondaryButton:active {
+  transform: translateY(0);
+}
+
+/* Button Icons */
+.buttonIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+/* Right Image */
+.rightImage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.doctorImage {
+  border-radius: 50px;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  min-height: 300px;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.doctorImage:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .mainSection {
+    flex-direction: row;
+    padding: 2rem 3rem;
+    align-items: center;
+    gap: 3rem;
+  }
+  
+  .leftContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 3rem;
+  }
+  
+  .description {
+    font-size: 1.25rem;
+  }
+  
+  .buttonContainer {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .rightImage {
+    flex: 1;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 380px;
+    max-height: 400px;
+    width: 100%;
+    max-width: 500px;
+    object-fit: contain;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainSection {
+    padding: 3rem 4rem;
+    gap: 4rem;
+  }
+  
+  .title {
+    font-size: 3.75rem;
+  }
+  
+  .doctorImage {
+    max-width: 600px;
+    height: auto;
+    min-height: 400px;
+    max-height: 450px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 640px) {
+  .homeContainer {
+    padding-top: 7rem;
+  }
+  
+  .mainSection {
+    padding: 2rem 1rem;
+    min-height: 50vh;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  .buttonIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 250px;
+    max-height: 300px;
+    border-radius: 30px;
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 480px) {
+  .homeContainer {
+    padding-top: 4.5rem;
+  }
+  
+  .mainSection {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 200px;
+    max-height: 250px;
+    border-radius: 20px;
+    object-fit: contain;
+  }
+}
+
+/* Statistics Section */
+.statisticsSection {
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.statisticsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.statCard {
+  background-color: #f0fdfa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+}
+
+.statIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.statSvgIcon {
+  width: 3rem;
+  height: 3rem;
+  color: #14b8a6;
+}
+
+.statNumber {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #0f766e;
+  margin: 0 0 0.5rem 0;
+}
+
+.statLabel {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #0dab9d;
+  margin: 0;
+}
+
+/* Featured Doctors Section */
+.featuredDoctorsSection {
+  background-color: #f0f9ff;
+  border: 2px solid #bae6fd;
+  border-radius: 1rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 72rem;
+}
+
+.featuredContainer {
+  width: 100%;
+}
+
+.featuredHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.featuredTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.featuredSubtitle {
+  font-size: 1rem;
+  color: #334155;
+  margin: 0;
+}
+
+.doctorsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.doctorCard {
+  background-color: #f0fdfa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctorCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+}
+
+.doctorHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.doctorAvatar {
+  width: 3rem;
+  height: 3rem;
+  background-color: #14b8a6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.avatarIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+}
+
+.doctorInfo {
+  flex: 1;
+}
+
+.doctorName {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0 0 0.25rem 0;
+}
+
+.doctorSpecialty {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: #12b3a0;
+  margin: 0;
+}
+
+.doctorHospital {
+  font-size: 0.875rem;
+  color: #334155;
+  margin: 0 0 0.5rem 0;
+}
+
+.doctorExperience {
+  font-size: 0.875rem;
+  color: #334155;
+  margin: 0 0 0.5rem 0;
+}
+
+.doctorAvailability {
+  font-size: 0.75rem;
+  color: #334155;
+  margin: 0 0 1rem 0;
+}
+
+.bookNowButton {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(to right, #fb923c, #ec4899);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.bookNowButton:hover {
+  background: linear-gradient(to right, #ea580c, #db2777);
+  transform: translateY(-1px);
+}
+
+.bookIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.availabilityDot {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+}
+
+.available {
+  background-color: #10b981;
+}
+
+.unavailable {
+  background-color: #9ca3af;
+}
+
+/* Why Choose HealthSync Section */
+.whyChooseSection {
+  width: 100%;
+  max-width: 72rem;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+}
+
+.whyChooseContainer {
+  width: 100%;
+}
+
+.whyChooseHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.whyChooseTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.featureCard {
+  background-color: #f0fdfa;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+}
+
+.featureIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.featureSvgIcon {
+  width: 3rem;
+  height: 3rem;
+  color: #14b8a6;
+}
+
+.featureTitle {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.featureDescription {
+  font-size: 0.875rem;
+  color: #334155;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Responsive Design for New Sections */
+@media (max-width: 768px) {
+  .statisticsSection {
+    padding: 1.5rem 1rem;
+  }
+  
+  .statisticsContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .statCard {
+    padding: 1rem;
+  }
+  
+  .statNumber {
+    font-size: 1.75rem;
+  }
+  
+  .statLabel {
+    font-size: 0.9rem;
+  }
+  
+  .featuredDoctorsSection {
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
+  }
+  
+  .featuredTitle {
+    font-size: 1.75rem;
+  }
+  
+  .featuredSubtitle {
+    font-size: 0.9rem;
+  }
+  
+  .doctorsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .doctorCard {
+    padding: 1rem;
+  }
+  
+  .doctorName {
+    font-size: 1rem;
+  }
+  
+  .doctorSpecialty {
+    font-size: 0.8rem;
+  }
+  
+  .doctorHospital,
+  .doctorExperience,
+  .doctorAvailability {
+    font-size: 0.8rem;
+  }
+  
+  .bookNowButton {
+    padding: 0.625rem;
+    font-size: 0.9rem;
+  }
+  
+  .whyChooseSection {
+    padding: 1.5rem 1rem;
+  }
+  
+  .whyChooseTitle {
+    font-size: 1.75rem;
+  }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .featureCard {
+    padding: 1rem;
+  }
+  
+  .featureTitle {
+    font-size: 1rem;
+  }
+  
+  .featureDescription {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .statisticsSection {
+    padding: 1rem 0.75rem;
+  }
+  
+  .featuredDoctorsSection {
+    margin: 0.75rem auto;
+    padding: 1rem 0.75rem;
+  }
+  
+  .whyChooseSection {
+    padding: 1rem 0.75rem;
+  }
+  
+  .statCard {
+    padding: 0.75rem;
+  }
+  
+  .doctorCard {
+    padding: 0.75rem;
+  }
+  
+  .featureCard {
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statisticsSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .featuredDoctorsSection {
+    padding: 0.75rem 0.5rem;
+    margin: 0.5rem auto;
+  }
+  
+  .whyChooseSection {
+    padding: 1rem 0.5rem;
+  }
+  
+  .featuredTitle,
+  .whyChooseTitle {
+    font-size: 1.5rem;
+  }
+  
+  .featuredSubtitle {
+    font-size: 0.85rem;
+  }
+  
+  .statNumber {
+    font-size: 1.5rem;
+  }
+  
+  .statLabel {
+    font-size: 0.85rem;
+  }
+  
+  .doctorName {
+    font-size: 0.95rem;
+  }
+  
+  .doctorSpecialty,
+  .doctorHospital,
+  .doctorExperience,
+  .doctorAvailability {
+    font-size: 0.75rem;
+  }
+  
+  .bookNowButton {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+  
+  .featureTitle {
+    font-size: 0.95rem;
+  }
+  
+  .featureDescription {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .statisticsSection {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .featuredDoctorsSection {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .whyChooseSection {
+    padding: 0.75rem 0.25rem;
+  }
+  
+  .featuredTitle,
+  .whyChooseTitle {
+    font-size: 1.25rem;
+  }
+  
+  .statNumber {
+    font-size: 1.25rem;
+  }
+  
+  .statLabel {
+    font-size: 0.8rem;
+  }
+}
