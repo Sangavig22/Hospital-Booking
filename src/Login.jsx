@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from './Login.module.css';
 
 function LoginForm() {
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  // Add animation delay for form elements
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsAnimating(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [isLoginMode]);
 
   return (
     <div className={styles.loginContainer}>
@@ -37,10 +46,10 @@ function LoginForm() {
         <form className={styles.form}>
           {/* Signup-only Field */}
           {!isLoginMode && (
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} ${isAnimating ? styles.animateIn : ''}`}>
               <input
                 type="text"
-                placeholder="Name"
+                placeholder="Full Name"
                 required
                 className={styles.input}
               />
@@ -48,7 +57,7 @@ function LoginForm() {
           )}
 
           {/* Email field */}
-          <div className={styles.inputGroup}>
+          <div className={`${styles.inputGroup} ${isAnimating ? styles.animateIn : ''}`}>
             <input
               type="email"
               placeholder="Email Address"
@@ -58,7 +67,7 @@ function LoginForm() {
           </div>
 
           {/* Password field */}
-          <div className={styles.inputGroup}>
+          <div className={`${styles.inputGroup} ${isAnimating ? styles.animateIn : ''}`}>
             <input
               type="password"
               placeholder="Password"
@@ -69,7 +78,7 @@ function LoginForm() {
 
           {/* Confirm Password field - only for signup */}
           {!isLoginMode && (
-            <div className={styles.inputGroup}>
+            <div className={`${styles.inputGroup} ${isAnimating ? styles.animateIn : ''}`}>
               <input
                 type="password"
                 placeholder="Confirm Password"

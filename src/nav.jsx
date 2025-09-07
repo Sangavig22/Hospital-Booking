@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from 'react';
-import { Bell, Globe, Search } from 'lucide-react';
+import { Bell, Globe, Search, Menu, X } from 'lucide-react';
 import logo from './assets/logo.png';
 import styles from './Nav.module.css';
 
 function Navbar() {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleLanguageDropdown = () => {
@@ -18,6 +19,10 @@ function Navbar() {
     setSelectedLanguage(language);
     setIsLanguageOpen(false);
     console.log(`${language} selected`);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   // Close dropdown when clicking outside
@@ -54,6 +59,15 @@ function Navbar() {
           <span className={styles.brandName}>HealthSync</span>
         </div>
 
+        {/* Mobile Menu Button */}
+        <button 
+          className={styles.mobileMenuButton}
+          onClick={toggleMobileMenu}
+          aria-label="Toggle mobile menu"
+        >
+          {isMobileMenuOpen ? <X className={styles.mobileMenuIcon} /> : <Menu className={styles.mobileMenuIcon} />}
+        </button>
+
         {/* Search Bar */}
         <div className={styles.searchContainer}>
           <div className={styles.searchWrapper}>
@@ -69,15 +83,15 @@ function Navbar() {
         </div>
 
         {/* Navigation Menu */}
-        <div className={styles.navMenu}>
-          <Link to="/" className={styles.navLink}>Home</Link>
-          <Link to="/about" className={styles.navLink}>About</Link>
-          <Link to="/contact" className={styles.navLink}>Contact</Link>
-          <Link to="/services" className={styles.navLink}>Services</Link>
+        <div className={`${styles.navMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
+          <Link to="/" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
+          <Link to="/about" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+          <Link to="/contact" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
+          <Link to="/services" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
         </div>
 
         {/* Right Elements */}
-        <div className={styles.rightElements}>
+        <div className={`${styles.rightElements} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
           {/* Notification Bell */}
           <button className={styles.notificationButton}>
             <Bell className={styles.notificationIcon} />
@@ -137,7 +151,7 @@ function Navbar() {
           </div>
 
           {/* Login Button */}
-          <Link to="/login" className={styles.loginButton}>
+          <Link to="/login" className={styles.loginButton} onClick={() => setIsMobileMenuOpen(false)}>
             Login
           </Link>
         </div>
