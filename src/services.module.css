@@ -1,5 +1,3 @@
-/* services.module.css */
-
 .servicesContainer {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
@@ -9,9 +7,9 @@
 
 /* Header Styles */
 .header {
-  background: linear-gradient(135deg, #1e4a72 0%, #2d5a87 100%);
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
   color: white;
-  padding: 80px 0;
+  padding: 60px 0;
   text-align: center;
 }
 
@@ -24,35 +22,16 @@
 .headerContent h1 {
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: 1px;
   letter-spacing: -0.5px;
 }
 
 .headerContent p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   opacity: 0.9;
   max-width: 600px;
-  margin: 0 auto 30px;
+  margin: 10px auto 0 auto;
   line-height: 1.6;
-}
-
-.ctaButton {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: 12px 30px;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
-}
-
-.ctaButton:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-2px);
 }
 
 /* Container */
@@ -70,12 +49,13 @@
 
 .sectionHeader h2 {
   font-size: 2.5rem;
-  color: #2d5a87;
-  margin-bottom: 15px;
+  color: #0b0c0b;
+  margin-top: 0px;
   font-weight: 700;
 }
 
 .sectionHeader p {
+  margin-top: 0.1rem;
   font-size: 1.1rem;
   color: #666;
   max-width: 600px;
@@ -130,7 +110,7 @@
 }
 
 .serviceCategory {
-  background: #2d5a87;
+  background: #2d875d;
   color: white;
   padding: 4px 12px;
   border-radius: 20px;
@@ -140,12 +120,17 @@
   letter-spacing: 0.5px;
 }
 
+/* Gradient Title */
 .serviceTitle {
   font-size: 1.3rem;
-  color: #2d5a87;
   margin-bottom: 15px;
   font-weight: 600;
   line-height: 1.4;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .serviceDescription {
@@ -201,57 +186,35 @@
   color: #1e4a72;
 }
 
-/* Why Choose Section */
-.whyChooseSection {
-  padding: 80px 0;
-  background: #f8f9fa;
+/* Animation */
+.fadeDown {
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeDown 0.8s forwards;
 }
 
-.benefitsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 40px;
-  margin-top: 60px;
+@keyframes fadeDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.benefitCard {
-  text-align: center;
-  padding: 40px 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+.fadeUp {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s forwards;
 }
 
-.benefitCard:hover {
-  transform: translateY(-5px);
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.benefitIcon {
-  font-size: 3rem;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #2d5a87 0%, #1e4a72 100%);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  color: white;
-}
-
-.benefitTitle {
-  font-size: 1.2rem;
-  color: #2d5a87;
-  margin-bottom: 15px;
-  font-weight: 600;
-}
-
-.benefitDescription {
-  color: #666;
-  line-height: 1.6;
-  font-size: 0.95rem;
+.hidden {
+  opacity: 0;
 }
 
 /* Responsive Design */
@@ -277,13 +240,7 @@
     padding: 25px;
   }
   
-  .benefitsGrid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  .servicesSection,
-  .whyChooseSection {
+  .servicesSection {
     padding: 60px 0;
   }
 }
@@ -306,16 +263,6 @@
   .serviceIcon {
     width: 50px;
     height: 50px;
-    font-size: 2rem;
-  }
-  
-  .benefitCard {
-    padding: 30px 15px;
-  }
-  
-  .benefitIcon {
-    width: 60px;
-    height: 60px;
     font-size: 2rem;
   }
 }

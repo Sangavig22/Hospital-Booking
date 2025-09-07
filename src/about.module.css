@@ -3,25 +3,64 @@
   font-family: sans-serif;
   background-color: #f9fafb;
   color: #1f2937;
+  overflow-x: hidden;
+
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.fadeInDown {
+  animation: fadeInDown 1s ease forwards;
 }
 
 /* Header */
 .header {
-  background-color: #06b6d4;
-  padding: 3rem 1rem;
+  margin-top: 2.5rem;
+  background:  linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  padding: 0.5rem 0.5rem;
   text-align: center;
   color: white;
+  margin-bottom: 3rem;   
 }
 
 .headerTitle {
-  font-size: 2rem;
+  padding: 1rem 1.5rem;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.1rem;
 }
 
 .headerSubtitle {
-  font-size: 1rem;
+  margin-top:0.1rem;
+  margin-bottom:3rem;
+  font-size: 1.2rem;
   font-weight: 500;
+  
 }
 
 /* Main */
@@ -29,6 +68,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+  margin-top: 2rem;  /* 🔹 extra spacing between header & main */
 }
 
 /* Mission & Vision */
@@ -42,14 +82,15 @@
 .missionVisionCard {
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   text-align: left;
-  transition: box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 5px 10px rgba(0,0,0,0.05);
 }
 
 .missionVisionCard:hover {
-  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.12);
 }
 
 .sectionTitle {
@@ -85,18 +126,19 @@
 .valueCard {
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   text-align: center;
-  transition: box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .valueCard:hover {
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
 
 .valueIcon {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3rem;
+  height: 3rem;
   background-color: #cffafe;
   border-radius: 50%;
   margin: 0 auto 0.75rem;
@@ -106,9 +148,9 @@
 }
 
 .svgIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: #06b6d4;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgb(25, 146, 90);;
 }
 
 .valueTitle {
@@ -131,20 +173,33 @@
 
 .statisticsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 2rem;
   text-align: center;
+}
+
+.statBox {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statBox:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.12);
 }
 
 .statNumber {
   font-size: 2rem;
   font-weight: bold;
-  color: #06b6d4;
+  color: rgb(25, 146, 90);;
   margin-bottom: 0.25rem;
 }
 
 .statLabel {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: #4b5563;
 }
 
@@ -157,16 +212,17 @@
 .teamCard {
   background-color: #ffffff;
   padding: 2rem;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   box-shadow: 0 5px 10px rgba(0,0,0,0.05);
-  transition: box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .teamCard:hover {
-  box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.12);
 }
 
 .teamTitle {

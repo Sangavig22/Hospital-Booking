@@ -65,118 +65,137 @@ const Contact = () => {
       {/* Main Content */}
       <main className={styles.mainContent}>
         <div className={styles.contentWrapper}>
-          {/* Contact Form */}
-          <div className={`${styles.formSection} ${isVisible ? styles.slideInLeft : ''}`}>
-            <h2 className={styles.sectionTitle}>Send Us a Message</h2>
-            <form onSubmit={handleSubmit} className={styles.contactForm}>
-              <div className={`${styles.formGroup} ${formFocus.fullName ? styles.focused : ''}`}>
-                <label htmlFor="fullName">Full Name *</label>
-                <input
-                  type="text"
-                  id="fullName"
-                  name="fullName"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus('fullName')}
-                  onBlur={() => handleBlur('fullName')}
-                  placeholder="Enter your full name"
-                  required
-                  className={styles.animatedInput}
-                />
-              </div>
+          {/* Left Column: Form + Location */}
+          <div className={styles.leftColumn}>
+            {/* Form Section */}
+            <div className={`${styles.formSection} ${isVisible ? styles.slideInLeft : ''}`}>
+              <h2 className={styles.sectionTitle}>Send Us a Message</h2>
+              <form onSubmit={handleSubmit} className={styles.contactForm}>
+                <div className={`${styles.formGroup} ${formFocus.fullName ? styles.focused : ''}`}>
+                  <label htmlFor="fullName">Full Name *</label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('fullName')}
+                    onBlur={() => handleBlur('fullName')}
+                    placeholder="Enter your full name"
+                    required
+                    className={styles.animatedInput}
+                  />
+                </div>
 
-              <div className={`${styles.formGroup} ${formFocus.emailAddress ? styles.focused : ''}`}>
-                <label htmlFor="emailAddress">Email Address *</label>
-                <input
-                  type="email"
-                  id="emailAddress"
-                  name="emailAddress"
-                  value={formData.emailAddress}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus('emailAddress')}
-                  onBlur={() => handleBlur('emailAddress')}
-                  placeholder="Enter your email address"
-                  required
-                  className={styles.animatedInput}
-                />
-              </div>
+                <div className={`${styles.formGroup} ${formFocus.emailAddress ? styles.focused : ''}`}>
+                  <label htmlFor="emailAddress">Email Address *</label>
+                  <input
+                    type="email"
+                    id="emailAddress"
+                    name="emailAddress"
+                    value={formData.emailAddress}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('emailAddress')}
+                    onBlur={() => handleBlur('emailAddress')}
+                    placeholder="Enter your email address"
+                    required
+                    className={styles.animatedInput}
+                  />
+                </div>
 
-              <div className={`${styles.formGroup} ${formFocus.phoneNumber ? styles.focused : ''}`}>
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus('phoneNumber')}
-                  onBlur={() => handleBlur('phoneNumber')}
-                  placeholder="Enter your phone number"
-                  className={styles.animatedInput}
-                />
-              </div>
+                <div className={`${styles.formGroup} ${formFocus.phoneNumber ? styles.focused : ''}`}>
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('phoneNumber')}
+                    onBlur={() => handleBlur('phoneNumber')}
+                    placeholder="Enter your phone number"
+                    className={styles.animatedInput}
+                  />
+                </div>
 
-              <div className={`${styles.formGroup} ${formFocus.inquiryType ? styles.focused : ''}`}>
-                <label htmlFor="inquiryType">Inquiry Type *</label>
-                <select
-                  id="inquiryType"
-                  name="inquiryType"
-                  value={formData.inquiryType}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus('inquiryType')}
-                  onBlur={() => handleBlur('inquiryType')}
-                  required
-                  className={styles.animatedInput}
+                <div className={`${styles.formGroup} ${formFocus.inquiryType ? styles.focused : ''}`}>
+                  <label htmlFor="inquiryType">Inquiry Type *</label>
+                  <select
+                    id="inquiryType"
+                    name="inquiryType"
+                    value={formData.inquiryType}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('inquiryType')}
+                    onBlur={() => handleBlur('inquiryType')}
+                    required
+                    className={styles.animatedInput}
+                  >
+                    <option value="">Please select inquiry type</option>
+                    <option value="general">General Inquiry</option>
+                    <option value="support">Technical Support</option>
+                    <option value="billing">Billing</option>
+                    <option value="partnership">Partnership</option>
+                  </select>
+                </div>
+
+                <div className={`${styles.formGroup} ${formFocus.message ? styles.focused : ''}`}>
+                  <label htmlFor="message">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus('message')}
+                    onBlur={() => handleBlur('message')}
+                    placeholder="Please describe how we can help"
+                    rows="5"
+                    required
+                    className={styles.animatedInput}
+                  ></textarea>
+                </div>
+
+                <div className={styles.formCheckbox}>
+                  <input type="checkbox" id="privacy" required className={styles.animatedCheckbox} />
+                  <label htmlFor="privacy">
+                    I agree to HealthSync's privacy policy and consent to the processing of my personal data for the purposes outlined in the privacy policy.
+                  </label>
+                </div>
+
+                <button 
+                  type="submit" 
+                  className={`${styles.submitBtn} ${submitLoading ? styles.loading : ''}`}
+                  disabled={submitLoading}
                 >
-                  <option value="">Please select inquiry type</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="support">Technical Support</option>
-                  <option value="billing">Billing</option>
-                  <option value="partnership">Partnership</option>
-                </select>
-              </div>
+                  {submitLoading ? (
+                    <span className={styles.loadingSpinner}>
+                      <span className={styles.spinner}></span>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
+                </button>
+              </form>
+            </div>
 
-              <div className={`${styles.formGroup} ${formFocus.message ? styles.focused : ''}`}>
-                <label htmlFor="message">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  onFocus={() => handleFocus('message')}
-                  onBlur={() => handleBlur('message')}
-                  placeholder="Please describe how we can help"
-                  rows="5"
-                  required
-                  className={styles.animatedInput}
-                ></textarea>
+            {/* Location Section */}
+            <div className={styles.locationSection}>
+              <h3>Our Location</h3>
+              <p>Visit us at our office</p>
+              <div className={`${styles.mapPlaceholder} ${styles.interactive}`}>
+                <div className={styles.mapIcon}>📍</div>
+                <p>Interactive Map<br />
+                  <span className={styles.clickText}>Click to view directions</span>
+                </p>
               </div>
-
-              <div className={styles.formCheckbox}>
-                <input type="checkbox" id="privacy" required className={styles.animatedCheckbox} />
-                <label htmlFor="privacy">
-                  I agree to HealthSync's privacy policy and consent to the processing of my personal data for the purposes outlined in the privacy policy.
-                </label>
+              <div className={styles.locationOptions}>
+                <span className={styles.locationFeature}>🚗 Parking available on site</span>
+                <span className={styles.locationFeature}>🚇 Accessible by metro</span>
               </div>
-
-              <button 
-                type="submit" 
-                className={`${styles.submitBtn} ${submitLoading ? styles.loading : ''}`}
-                disabled={submitLoading}
-              >
-                {submitLoading ? (
-                  <span className={styles.loadingSpinner}>
-                    <span className={styles.spinner}></span>
-                    Sending...
-                  </span>
-                ) : (
-                  'Send Message'
-                )}
-              </button>
-            </form>
+            </div>
           </div>
 
-          {/* Contact Information */}
+          {/* Right Column: Contact Information */}
           <div className={`${styles.infoSection} ${isVisible ? styles.slideInRight : ''}`}>
             <h2 className={styles.sectionTitle}>Get in Touch</h2>
             
@@ -222,29 +241,11 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Bottom Section with Location and Emergency side by side */}
-            <div className={styles.bottomSection}>
-              <div className={styles.emergencySection}>
-                <h4>Need Immediate Assistance?</h4>
-                <p>For urgent healthcare support or technical emergencies, please call our 24/7 support line at <strong>(555) 911-HELP</strong> or email <strong>emergency@healthsync.com</strong></p>
-                <div className={styles.emergencyPulse}></div>
-              </div>
-
-              <div className={styles.locationSection}>
-                <h3>Our Location</h3>
-                <p>Visit us at our office</p>
-                
-                <div className={`${styles.mapPlaceholder} ${styles.interactive}`}>
-                  <div className={styles.mapIcon}>📍</div>
-                  <p>Interactive Map<br />
-                  <span className={styles.clickText}>Click to view directions</span></p>
-                </div>
-                
-                <div className={styles.locationOptions}>
-                  <span className={styles.locationFeature}>🚗 Parking available on site</span>
-                  <span className={styles.locationFeature}>🚇 Accessible by metro</span>
-                </div>
-              </div>
+            {/* Emergency Section */}
+            <div className={styles.emergencySection}>
+              <h4>Need Immediate Assistance?</h4>
+              <p>For urgent healthcare support or technical emergencies, please call our 24/7 support line at <strong>(555) 911-HELP</strong> or email <strong>emergency@healthsync.com</strong></p>
+              <div className={styles.emergencyPulse}></div>
             </div>
           </div>
         </div>

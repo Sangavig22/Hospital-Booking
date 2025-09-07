@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from "react";
 import styles from "./about.module.css";
 
@@ -13,7 +14,7 @@ const AboutHealthSync = () => {
   // Animate numbers (count up)
   const animateValue = (setter, end, duration) => {
     let start = 0;
-    const interval = 20; // update every 20ms
+    const interval = 20;
     const increment = Math.max(end / (duration / interval), 1);
 
     const timer = setInterval(() => {
@@ -40,7 +41,7 @@ const AboutHealthSync = () => {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
 
     if (statsRef.current) observer.observe(statsRef.current);
@@ -53,7 +54,7 @@ const AboutHealthSync = () => {
   return (
     <div className={styles.container}>
       {/* Header */}
-      <header className={styles.header}>
+      <header className={`${styles.header} ${styles.fadeInDown}`}>
         <h1 className={styles.headerTitle}>About HealthSync</h1>
         <p className={styles.headerSubtitle}>
           Revolutionizing Healthcare in Sri Lanka
@@ -62,26 +63,28 @@ const AboutHealthSync = () => {
 
       <main className={styles.main}>
         {/* Mission & Vision */}
-        <section className={styles.missionVision}>
+        <section className={`${styles.missionVision} ${styles.fadeInUp}`}>
           <div className={styles.missionVisionCard}>
             <h2 className={styles.sectionTitle}>Our Mission</h2>
             <p className={styles.sectionDescription}>
-              To make healthcare accessible to every Sri Lankan through innovative
-              technology, compassionate care and quality education, ensuring excellence in service delivery.
+              To make healthcare accessible to every Sri Lankan through
+              innovative technology, compassionate care and quality education,
+              ensuring excellence in service delivery.
             </p>
           </div>
 
           <div className={styles.missionVisionCard}>
             <h2 className={styles.sectionTitle}>Our Vision</h2>
             <p className={styles.sectionDescription}>
-              A Sri Lanka where every individual has access to healthcare solutions
-              regardless of location, financial or technological barriers.
+              A Sri Lanka where every individual has access to healthcare
+              solutions regardless of location, financial or technological
+              barriers.
             </p>
           </div>
         </section>
 
         {/* Values */}
-        <section className={styles.valuesSection}>
+        <section className={`${styles.valuesSection} ${styles.fadeInUp}`}>
           <h2 className={styles.valuesTitle}>Our Values</h2>
           <div className={styles.valuesGrid}>
             {/* Patient First */}
@@ -103,7 +106,8 @@ const AboutHealthSync = () => {
               </div>
               <h3 className={styles.valueTitle}>Patient First</h3>
               <p className={styles.valueDescription}>
-                Every decision we make prioritizes patient outcomes and experiences above all else.
+                Every decision we make prioritizes patient outcomes and
+                experiences above all else.
               </p>
             </div>
 
@@ -126,7 +130,8 @@ const AboutHealthSync = () => {
               </div>
               <h3 className={styles.valueTitle}>Excellence</h3>
               <p className={styles.valueDescription}>
-                We strive for the highest standards in everything we do, from patient care to technological innovation.
+                We strive for the highest standards in everything we do, from
+                patient care to technological innovation.
               </p>
             </div>
 
@@ -149,7 +154,8 @@ const AboutHealthSync = () => {
               </div>
               <h3 className={styles.valueTitle}>Inclusivity</h3>
               <p className={styles.valueDescription}>
-                Healthcare for all, bringing everyone into our health system without bias.
+                Healthcare for all, bringing everyone into our health system
+                without bias.
               </p>
             </div>
 
@@ -172,41 +178,58 @@ const AboutHealthSync = () => {
               </div>
               <h3 className={styles.valueTitle}>Sustainability</h3>
               <p className={styles.valueDescription}>
-                Building durable solutions working forward by future generations.
+                Building durable solutions working forward by future
+                generations.
               </p>
             </div>
           </div>
         </section>
 
         {/* Statistics */}
-        <section className={styles.statisticsSection} ref={statsRef}>
+        <section
+          className={`${styles.statisticsSection} ${styles.fadeInUp}`}
+          ref={statsRef}
+        >
           <div className={styles.statisticsGrid}>
-            <div>
-              <div className={styles.statNumber}>{patients.toLocaleString()}+</div>
+            <div className={styles.statBox}>
+              <div className={styles.statNumber}>
+                {patients.toLocaleString()}+
+              </div>
               <div className={styles.statLabel}>Patients Served</div>
             </div>
-            <div>
-              <div className={styles.statNumber}>{providers.toLocaleString()}+</div>
+            <div className={styles.statBox}>
+              <div className={styles.statNumber}>
+                {providers.toLocaleString()}+
+              </div>
               <div className={styles.statLabel}>Health Providers</div>
             </div>
-            <div>
-              <div className={styles.statNumber}>{doctors.toLocaleString()}+</div>
+            <div className={styles.statBox}>
+              <div className={styles.statNumber}>
+                {doctors.toLocaleString()}+
+              </div>
               <div className={styles.statLabel}>Doctors Available</div>
             </div>
-            <div>
-              <div className={styles.statNumber}>{treatments.toLocaleString()}+</div>
+            <div className={styles.statBox}>
+              <div className={styles.statNumber}>
+                {treatments.toLocaleString()}+
+              </div>
               <div className={styles.statLabel}>Successful Treatments</div>
             </div>
           </div>
         </section>
 
         {/* Team */}
-        <section className={styles.teamSection}>
+        <section className={`${styles.teamSection} ${styles.fadeInUp}`}>
           <div className={styles.teamCard}>
             <h2 className={styles.teamTitle}>Our Team</h2>
             <div className={styles.teamDescriptionWrapper}>
               <p className={styles.teamDescription}>
-                We are a passionate team of healthcare professionals, technology experts, and community advocates who have come together with a shared vision to revolutionize healthcare in Sri Lanka. Our multidisciplinary approach combines clinical expertise with cutting-edge technology to deliver exceptional care and improve health outcomes for all Sri Lankans.
+                We are a passionate team of healthcare professionals,
+                technology experts, and community advocates who have come
+                together with a shared vision to revolutionize healthcare in Sri
+                Lanka. Our multidisciplinary approach combines clinical
+                expertise with cutting-edge technology to deliver exceptional
+                care and improve health outcomes for all Sri Lankans.
               </p>
             </div>
           </div>
@@ -217,4 +240,3 @@ const AboutHealthSync = () => {
 };
 
 export default AboutHealthSync;
-
