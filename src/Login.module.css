@@ -12,7 +12,7 @@
   overflow: hidden;
 }
 
-/* Remove all default browser outlines and borders */
+
 .loginContainer * {
   outline: none !important;
 }
@@ -391,5 +391,5 @@
   }
 }
 
-/* Additional floating elements - removed hospital symbol */
+
 

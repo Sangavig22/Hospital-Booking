@@ -236,7 +236,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-  max-height: ;
+  max-height: 400px;
 
   max-width:100%; 
   animation: slideInRight 1s ease-out 0.4s both;

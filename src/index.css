@@ -1,10 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* ...existing :root, a, body, h1 styles remain unchanged... */
 
-/* Scope button styles to a custom class instead of global */
 .app-button {
   border-radius: 8px;
   border: 1px solid transparent;

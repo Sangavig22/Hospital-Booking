@@ -204,9 +204,9 @@ const Contact = () => {
                 <div className={styles.infoIcon}>📍</div>
                 <div className={styles.infoDetails}>
                   <h4>Office Address</h4>
-                  <p>123 Healthcare Boulevard<br />
-                  Medical District, NY 10001<br />
-                  United States</p>
+                  <p>123 Hospital Road<br />
+                  Katubedda, Colombo 10001<br />
+                  Sri Lanka</p>
                 </div>
               </div>
 
@@ -214,9 +214,9 @@ const Contact = () => {
                 <div className={styles.infoIcon}>📞</div>
                 <div className={styles.infoDetails}>
                   <h4>Phone Numbers</h4>
-                  <p>Main: (555) 123-4567<br />
-                  Emergency: (555) 987-6543<br />
-                  Toll-free: (800) 123-4567</p>
+                  <p>Main:(+94) 123-4567<br />
+                  Emergency:1990<br />
+                  Toll-free: (+94) 123-4567</p>
                 </div>
               </div>
 
@@ -229,12 +229,19 @@ const Contact = () => {
                   Sales: sales@healthsync.com</p>
                 </div>
               </div>
+              <div className={`${styles.infoItem} ${styles.hoverable}`}>
+  <div className={styles.infoIcon}>🏥</div>
+  <div className={styles.infoDetails}>
+    <h4>Hospital Service Hours</h4>
+    <p>Open 24/7</p>
+  </div>
+</div>
 
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
                 <div className={styles.infoIcon}>🕒</div>
                 <div className={styles.infoDetails}>
-                  <h4>Business Hours</h4>
-                  <p>Monday - Friday: 8 AM - 6 PM EST<br />
+                  <h4>Pharmacy Service Hours</h4>
+                  <p> 8 AM - 6 PM EST<br />
                   Saturday: 9 AM - 4 PM EST<br />
                   Sunday: Closed</p>
                 </div>
