@@ -1,6 +1,84 @@
-/* Home Page Styles */
+/* Home Page Styles with Animations */
 .homeContainer {
   padding-top: 8rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .mainSection {
@@ -19,6 +97,7 @@
 .leftContent {
   flex: 1;
   width: 100%;
+  animation: slideInLeft 1s ease-out 0.2s both;
 }
 
 .title {
@@ -27,6 +106,7 @@
   color: #1e293b;
   margin-bottom: 1.5rem;
   line-height: 1.1;
+  animation: slideInUp 0.8s ease-out 0.4s both;
 }
 
 .description {
@@ -34,6 +114,7 @@
   color: #334155;
   margin-bottom: 2rem;
   line-height: 1.6;
+  animation: slideInUp 0.8s ease-out 0.6s both;
 }
 
 /* Button Container */
@@ -41,16 +122,17 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  animation: slideInUp 0.8s ease-out 0.8s both;
 }
 
 /* Primary Button - Book Appointment */
 .primaryButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(to right, #fb923c, #ec4899);
+  background: linear-gradient(135deg, #fb923c, #ec4899);
   color: white;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -58,45 +140,80 @@
   text-decoration: none;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(251, 146, 60, 0.3);
+  box-shadow: 0 4px 15px rgba(251, 146, 60, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.primaryButton:hover::before {
+  left: 100%;
 }
 
 .primaryButton:hover {
-  background: linear-gradient(to right, #df1414, #db2777);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(251, 146, 60, 0.4);
+  background: linear-gradient(135deg, #ea580c, #db2777);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(251, 146, 60, 0.5);
 }
 
 .primaryButton:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 /* Secondary Button - Emergency */
 .secondaryButton {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(to right, #e70d60, #a71a91);
+ background: linear-gradient(to right, #e70d60, #a71a91);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.secondaryButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.secondaryButton:hover::before {
+  left: 100%;
 }
 
 .secondaryButton:hover {
-  background: linear-gradient(to right, #e71815, #c9225f);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 8px rgba(229, 11, 116, 0.4);
+  background: linear-gradient(135deg, #b91c65, #c11313);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
+  animation: pulse 1.5s infinite;
 }
 
 .secondaryButton:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 /* Button Icons */
@@ -104,169 +221,43 @@
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.primaryButton:hover .buttonIcon,
+.secondaryButton:hover .buttonIcon {
+  transform: scale(1.1);
 }
 
 /* Right Image */
 .rightImage {
-  flex: 1;
+  flex: 1; 
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-  width: 100%;
+  max-height: ;
+
+  max-width:100%; 
+  animation: slideInRight 1s ease-out 0.4s both;
 }
 
 .doctorImage {
-  border-radius: 50px;
+  border-radius: 24px;
   width: 100%;
   max-width: 500px;
   height: auto;
   min-height: 300px;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
-  transition: transform 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  animation: float 6s ease-in-out infinite;
 }
 
 .doctorImage:hover {
-  transform: scale(1.02);
-}
-
-/* Responsive Design */
-@media (min-width: 768px) {
-  .mainSection {
-    flex-direction: row;
-    padding: 2rem 3rem;
-    align-items: center;
-    gap: 3rem;
-  }
-  
-  .leftContent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .title {
-    font-size: 3rem;
-  }
-  
-  .description {
-    font-size: 1.25rem;
-  }
-  
-  .buttonContainer {
-    flex-direction: row;
-    gap: 1.5rem;
-  }
-  
-  .rightImage {
-    flex: 1;
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .doctorImage {
-    height: auto;
-    min-height: 380px;
-    max-height: 400px;
-    width: 100%;
-    max-width: 500px;
-    object-fit: contain;
-  }
-}
-
-@media (min-width: 1024px) {
-  .mainSection {
-    padding: 3rem 4rem;
-    gap: 4rem;
-  }
-  
-  .title {
-    font-size: 3.75rem;
-  }
-  
-  .doctorImage {
-    max-width: 600px;
-    height: auto;
-    min-height: 400px;
-    max-height: 450px;
-    object-fit: contain;
-  }
-}
-
-@media (max-width: 640px) {
-  .homeContainer {
-    padding-top: 7rem;
-  }
-  
-  .mainSection {
-    padding: 2rem 1rem;
-    min-height: 50vh;
-  }
-  
-  .title {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .description {
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .primaryButton,
-  .secondaryButton {
-    padding: 0.625rem 1.25rem;
-    font-size: 0.9rem;
-  }
-  
-  .buttonIcon {
-    width: 1rem;
-    height: 1rem;
-  }
-  
-  .doctorImage {
-    height: auto;
-    min-height: 250px;
-    max-height: 300px;
-    border-radius: 30px;
-    object-fit: contain;
-  }
-}
-
-@media (max-width: 480px) {
-  .homeContainer {
-    padding-top: 4.5rem;
-  }
-  
-  .mainSection {
-    padding: 1.5rem 0.75rem;
-  }
-  
-  .title {
-    font-size: 1.75rem;
-  }
-  
-  .description {
-    font-size: 0.9rem;
-  }
-  
-  .primaryButton,
-  .secondaryButton {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-  
-  .doctorImage {
-    height: auto;
-    min-height: 200px;
-    max-height: 250px;
-    border-radius: 20px;
-    object-fit: contain;
-  }
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
 /* Statistics Section */
@@ -275,6 +266,7 @@
   max-width: 72rem;
   margin: 0 auto;
   padding: 2rem 1rem;
+  animation: slideInUp 0.8s ease-out 1s both;
 }
 
 .statisticsContainer {
@@ -284,16 +276,36 @@
 }
 
 .statCard {
-  background-color: #f0fdfa;
-  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(20, 184, 166, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #06b6d4);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover::before {
+  transform: scaleX(1);
 }
 
 .statCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(20, 184, 166, 0.2);
+  border-color: rgba(20, 184, 166, 0.2);
 }
 
 .statIcon {
@@ -306,6 +318,12 @@
   width: 3rem;
   height: 3rem;
   color: #14b8a6;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statSvgIcon {
+  transform: scale(1.1);
+  color: #0d9488;
 }
 
 .statNumber {
@@ -313,6 +331,12 @@
   font-weight: bold;
   color: #0f766e;
   margin: 0 0 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .statNumber {
+  color: #0d9488;
+  transform: scale(1.05);
 }
 
 .statLabel {
@@ -324,12 +348,13 @@
 
 /* Featured Doctors Section */
 .featuredDoctorsSection {
-  background-color: #f0f9ff;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
   border: 2px solid #bae6fd;
-  border-radius: 1rem;
+  border-radius: 20px;
   margin: 2rem auto;
   padding: 2rem;
   max-width: 72rem;
+  animation: slideInUp 0.8s ease-out 1.2s both;
 }
 
 .featuredContainer {
@@ -346,12 +371,14 @@
   font-weight: bold;
   color: #1e293b;
   margin: 0 0 0.5rem 0;
+  animation: slideInUp 0.6s ease-out 1.4s both;
 }
 
 .featuredSubtitle {
   font-size: 1rem;
   color: #334155;
   margin: 0;
+  animation: slideInUp 0.6s ease-out 1.6s both;
 }
 
 .doctorsGrid {
@@ -361,16 +388,43 @@
 }
 
 .doctorCard {
-  background-color: #f0fdfa;
-  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  border-radius: 16px;
   padding: 1.5rem;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(20, 184, 166, 0.1);
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out calc(1.8s + var(--delay, 0s)) both;
+}
+
+.doctorCard:nth-child(1) { --delay: 0s; }
+.doctorCard:nth-child(2) { --delay: 0.1s; }
+.doctorCard:nth-child(3) { --delay: 0.2s; }
+.doctorCard:nth-child(4) { --delay: 0.3s; }
+.doctorCard:nth-child(5) { --delay: 0.4s; }
+.doctorCard:nth-child(6) { --delay: 0.5s; }
+
+.doctorCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #06b6d4);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.doctorCard:hover::before {
+  transform: scaleX(1);
 }
 
 .doctorCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(20, 184, 166, 0.2);
+  border-color: rgba(20, 184, 166, 0.2);
 }
 
 .doctorHeader {
@@ -382,12 +436,18 @@
 .doctorAvatar {
   width: 3rem;
   height: 3rem;
-  background-color: #14b8a6;
+  background: linear-gradient(135deg, #14b8a6, #06b6d4);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.doctorCard:hover .doctorAvatar {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
 }
 
 .avatarIcon {
@@ -435,27 +495,50 @@
 .bookNowButton {
   width: 100%;
   padding: 0.75rem;
-  background: linear-gradient(to right, #fb923c, #ec4899);
+  background: linear-gradient(135deg, #fb923c, #ec4899);
   color: white;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 12px;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bookNowButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.bookNowButton:hover::before {
+  left: 100%;
 }
 
 .bookNowButton:hover {
-  background: linear-gradient(to right, #ea580c, #db2777);
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #ea580c, #db2777);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(251, 146, 60, 0.4);
 }
 
 .bookIcon {
   width: 1rem;
   height: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.bookNowButton:hover .bookIcon {
+  transform: scale(1.1);
 }
 
 .availabilityDot {
@@ -465,14 +548,21 @@
   width: 0.75rem;
   height: 0.75rem;
   border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .available {
   background-color: #10b981;
+  animation: pulse 2s infinite;
 }
 
 .unavailable {
   background-color: #9ca3af;
+}
+
+.doctorCard:hover .availabilityDot.available {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
 
 /* Why Choose HealthSync Section */
@@ -481,6 +571,7 @@
   max-width: 72rem;
   margin: 2rem auto;
   padding: 2rem 1rem;
+  animation: slideInUp 0.8s ease-out 2s both;
 }
 
 .whyChooseContainer {
@@ -497,6 +588,7 @@
   font-weight: bold;
   color: #1e293b;
   margin: 0;
+  animation: slideInUp 0.6s ease-out 2.2s both;
 }
 
 .featuresGrid {
@@ -506,16 +598,42 @@
 }
 
 .featureCard {
-  background-color: #f0fdfa;
-  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(20, 184, 166, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out calc(2.4s + var(--delay, 0s)) both;
+}
+
+.featureCard:nth-child(1) { --delay: 0s; }
+.featureCard:nth-child(2) { --delay: 0.1s; }
+.featureCard:nth-child(3) { --delay: 0.2s; }
+.featureCard:nth-child(4) { --delay: 0.3s; }
+
+.featureCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #14b8a6, #06b6d4);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.featureCard:hover::before {
+  transform: scaleX(1);
 }
 
 .featureCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(20, 184, 166, 0.2);
+  border-color: rgba(20, 184, 166, 0.2);
 }
 
 .featureIcon {
@@ -528,6 +646,12 @@
   width: 3rem;
   height: 3rem;
   color: #14b8a6;
+  transition: all 0.3s ease;
+}
+
+.featureCard:hover .featureSvgIcon {
+  transform: scale(1.1);
+  color: #0d9488;
 }
 
 .featureTitle {
@@ -535,6 +659,11 @@
   font-weight: bold;
   color: #1e293b;
   margin: 0 0 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.featureCard:hover .featureTitle {
+  color: #0d9488;
 }
 
 .featureDescription {
@@ -542,6 +671,149 @@
   color: #334155;
   margin: 0;
   line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .mainSection {
+    flex-direction: row;
+    padding: 2rem 3rem;
+    align-items: center;
+    gap: 3rem;
+  }
+  
+  .leftContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .title {
+    font-size: 3rem;
+  }
+  
+  .description {
+    font-size: 1.25rem;
+  }
+  
+  .buttonContainer {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+  
+  .rightImage {
+    flex: 1;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 380px;
+    max-height: 400px;
+    width: 100%;
+    max-width: 500px;
+    object-fit: cover;
+    border-radius: 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainSection {
+    padding: 3rem 4rem;
+    gap: 4rem;
+  }
+  
+  .title {
+    font-size: 3.75rem;
+  }
+  
+  .doctorImage {
+    max-width: 600px;
+    height: auto;
+    min-height: 400px;
+    max-height: 450px;
+    object-fit: cover;
+    border-radius: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .homeContainer {
+    padding-top: 7rem;
+  }
+  
+  .mainSection {
+    padding: 2rem 1rem;
+    min-height: 50vh;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+  
+  .buttonIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 250px;
+    max-height: 300px;
+    border-radius: 20px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .homeContainer {
+    padding-top: 4.5rem;
+  }
+  
+  .mainSection {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+  
+  .doctorImage {
+    height: auto;
+    min-height: 200px;
+    max-height: 250px;
+    border-radius: 16px;
+    object-fit: contain;
+    
+  }
 }
 
 /* Responsive Design for New Sections */
@@ -557,6 +829,7 @@
   
   .statCard {
     padding: 1rem;
+    border-radius: 12px;
   }
   
   .statNumber {
@@ -570,6 +843,7 @@
   .featuredDoctorsSection {
     margin: 1rem auto;
     padding: 1.5rem 1rem;
+    border-radius: 16px;
   }
   
   .featuredTitle {
@@ -587,6 +861,7 @@
   
   .doctorCard {
     padding: 1rem;
+    border-radius: 12px;
   }
   
   .doctorName {
@@ -606,6 +881,7 @@
   .bookNowButton {
     padding: 0.625rem;
     font-size: 0.9rem;
+    border-radius: 10px;
   }
   
   .whyChooseSection {
@@ -623,6 +899,7 @@
   
   .featureCard {
     padding: 1rem;
+    border-radius: 12px;
   }
   
   .featureTitle {
@@ -742,4 +1019,27 @@
   .statLabel {
     font-size: 0.8rem;
   }
+}
+
+/* Smooth scrolling behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #14b8a6, #06b6d4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #0d9488, #0284c7);
 }

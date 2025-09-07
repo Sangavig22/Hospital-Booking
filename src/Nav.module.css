@@ -9,6 +9,8 @@
   background-color: #e8f5f3;
   border-bottom: 1px solid #d1f5f5;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  /* CRITICAL FIX: Allow dropdown to extend beyond navbar */
+  overflow: visible !important;
 }
 
 .container {
@@ -19,6 +21,8 @@
   justify-content: space-between;
   max-width: 100vw;
   overflow-x: auto;
+  /* CRITICAL FIX: Allow dropdown to extend beyond container */
+  overflow-y: visible !important;
 }
 
 /* Logo Section */
@@ -26,6 +30,28 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+  z-index: 1000;
+}
+
+.mobileMenuButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mobileMenuIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #1e293b;
 }
 
 .logoImage {
@@ -38,7 +64,6 @@
   font-weight: bold;
   font-size: 1.5rem;
   color: #1e293b;
- 
 }
 
 /* Search Bar */
@@ -120,6 +145,8 @@
   flex-shrink: 0;
   min-width: fit-content;
   margin-right: 2rem;
+  /* CRITICAL FIX: Allow dropdown to extend beyond right elements */
+  overflow: visible !important;
 }
 
 /* Notification Bell */
@@ -142,16 +169,17 @@
   color: #1e293b;
 }
 
-/* Language Dropdown */
+/* Language Dropdown - COMPLETELY REWRITTEN FOR BETTER UX */
 .languageDropdown {
   position: relative;
-  z-index: 100;
+  /* CRITICAL FIX: Extremely high z-index */
+  z-index: 9999;
 }
 
 .languageButton {
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: 1px solid #d1f5f5;
@@ -160,18 +188,23 @@
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
+  /* Enhanced visual appearance */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .languageButton:hover {
   background-color: white;
   border-color: #14b8a6;
-  box-shadow: 0 2px 4px rgba(20, 184, 166, 0.1);
+  box-shadow: 0 4px 8px rgba(20, 184, 166, 0.15);
+  transform: translateY(-1px);
 }
 
 .languageButton:focus {
   outline: none;
   border-color: #14b8a6;
-  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
 }
 
 .languageIcon {
@@ -185,33 +218,50 @@
   width: 1rem;
   height: 1rem;
   margin-left: 0.5rem;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
   flex-shrink: 0;
 }
 
-.languageDropdown:hover .dropdownArrow,
 .arrowRotated {
   transform: rotate(180deg);
 }
 
+/* CRITICAL IMPROVEMENTS: Language List Dropdown */
 .languageList {
   position: absolute;
-  top: calc(100% + 0.5rem);
+  /* CRITICAL FIX: More space and better positioning */
+  top: calc(100% + 12px);
   right: 0;
   background-color: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-  border-radius: 0.5rem;
-  padding: 0.5rem 0;
-  width: 8rem;
-  z-index: 1000;
-  border: 1px solid #e5e7eb;
+  /* CRITICAL FIX: Much stronger shadow for clear separation */
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 160px;
+  /* CRITICAL FIX: Extremely high z-index */
+  z-index: 10000;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
-  transition: all 0.2s ease;
+  transform: translateY(0) scale(1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: block;
   list-style: none;
   margin: 0;
+  /* Enhanced visual effects */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Better hidden state handling */
+.languageList[style*="display: none"] {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  pointer-events: none;
 }
 
 .languageItem {
@@ -221,40 +271,48 @@
 .languageLink {
   display: block;
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   color: #1e293b;
   text-decoration: none;
   background: none;
   border: none;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   font-size: 0.9rem;
   font-weight: 500;
+  line-height: 1.4;
 }
 
 .languageLink:hover {
   background-color: #f0fdfa;
   color: #14b8a6;
+  transform: translateX(2px);
 }
 
 .languageLink:focus {
   outline: none;
   background-color: #f0fdfa;
   color: #14b8a6;
+  box-shadow: inset 0 0 0 2px rgba(20, 184, 166, 0.2);
 }
 
 .selectedLanguage {
   background-color: #f0fdfa;
   color: #14b8a6;
   font-weight: 600;
+  position: relative;
 }
 
 .selectedLanguage::after {
   content: "✓";
-  float: right;
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
   font-weight: bold;
   color: #14b8a6;
+  font-size: 14px;
 }
 
 /* Login Button */
@@ -278,10 +336,34 @@
   box-shadow: 0 4px 8px rgba(35, 159, 151, 0.4);
 }
 
-/* Responsive Design */
+/* Mobile responsiveness improvements */
+@media (max-width: 768px) {
+  .languageList {
+    right: -8px;
+    min-width: 140px;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .languageList {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) translateY(0) scale(1);
+    min-width: 120px;
+  }
+  
+  .languageList[style*="display: none"] {
+    transform: translateX(-50%) translateY(-10px) scale(0.95);
+  }
+}
+
+/* Responsive Design with overflow fixes */
 @media (max-width: 1200px) {
   .container {
     padding: 0.75rem 0.5rem;
+    overflow-y: visible !important;
   }
   
   .searchContainer {
@@ -296,6 +378,7 @@
   .rightElements {
     gap: 0.75rem;
     margin-right: 0.75rem;
+    overflow: visible !important;
   }
   
   .navLink {
@@ -306,6 +389,7 @@
 @media (max-width: 1024px) {
   .container {
     padding: 0.75rem 0.5rem;
+    overflow-y: visible !important;
   }
   
   .searchContainer {
@@ -320,6 +404,7 @@
   .rightElements {
     gap: 0.5rem;
     margin-right: 0.5rem;
+    overflow: visible !important;
   }
   
   .navLink {
@@ -332,6 +417,7 @@
     flex-wrap: wrap;
     gap: 0.75rem;
     padding: 0.75rem 1rem;
+    overflow-y: visible !important;
   }
   
   .logoSection {
@@ -359,6 +445,7 @@
     order: 4;
     gap: 0.75rem;
     flex: 0 0 auto;
+    overflow: visible !important;
   }
   
   .navLink {
@@ -382,6 +469,7 @@
     gap: 0.5rem;
     padding: 0.5rem 1rem;
     align-items: center;
+    overflow-y: visible !important;
   }
   
   .logoSection {
@@ -410,6 +498,7 @@
     justify-content: center;
     gap: 0.5rem;
     flex: 0 0 auto;
+    overflow: visible !important;
   }
   
   .navLink {
@@ -437,6 +526,7 @@
     flex-wrap: wrap;
     gap: 0.5rem;
     align-items: center;
+    overflow-y: visible !important;
   }
   
   .logoSection {
@@ -467,6 +557,7 @@
     flex-wrap: wrap;
     justify-content: center;
     flex: 0 0 auto;
+    overflow: visible !important;
   }
   
   .navLink {
@@ -493,10 +584,6 @@
     font-size: 0.9rem;
   }
   
-  .languageList {
-    width: 6rem;
-  }
-  
   .languageLink {
     padding: 0.375rem 0.75rem;
     font-size: 0.8rem;
@@ -508,6 +595,7 @@
     padding: 0.375rem 0.5rem;
     flex-wrap: wrap;
     gap: 0.25rem;
+    overflow-y: visible !important;
   }
   
   .logoSection {
@@ -533,6 +621,7 @@
     order: 4;
     flex: 0 0 auto;
     gap: 0.2rem;
+    overflow: visible !important;
   }
   
   .brandName {
