@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import styles from './contact.module.css';
+import axios from 'axios';
+import {toast} from 'react-toastify';
+import {AppContent} from "./content/AppContent";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    emailAddress: '',
-    phoneNumber: '',
-    inquiryType: '',
-    message: ''
-  });
+  const { backendUrl } = useContext(AppContent);
 
+  const [formData, setFormData] = useState({
+  fullName: '',
+  emailAddress: '',
+  phoneNumber: '',
+  inquiryType: '',
+  message: ''
+});
   const [isVisible, setIsVisible] = useState(false);
   const [formFocus, setFormFocus] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
+
 
   useEffect(() => {
     setIsVisible(true);
@@ -33,24 +38,26 @@ const Contact = () => {
     setFormFocus(prev => ({ ...prev, [fieldName]: false }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitLoading(true);
+const onSubmitHandler = async (e) => {
+
+  try {
+      e.preventDefault();
+    axios.defaults.withCredentials = true;
+    const { data } = await axios.post(
+      backendUrl + '/api/auth/message',
+      formData
+    );
+    if (data.success) {
+      toast.success(data.message);
+     
+    } else {
+      toast.error(data.message);
+    }
+  } catch (error) {
+    toast.error(error.response?.data?.message || error.message || "Something went wrong");
+  }
+};
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setSubmitLoading(false);
-      // Reset form
-      setFormData({
-        fullName: '',
-        emailAddress: '',
-        phoneNumber: '',
-        inquiryType: '',
-        message: ''
-      });
-    }, 2000);
-  };
 
   return (
     <div className={styles.healthsyncContainer}>
@@ -70,7 +77,7 @@ const Contact = () => {
             {/* Form Section */}
             <div className={`${styles.formSection} ${isVisible ? styles.slideInLeft : ''}`}>
               <h2 className={styles.sectionTitle}>Send Us a Message</h2>
-              <form onSubmit={handleSubmit} className={styles.contactForm}>
+              <form onSubmit={onSubmitHandler} className={styles.contactForm}>
                 <div className={`${styles.formGroup} ${formFocus.fullName ? styles.focused : ''}`}>
                   <label htmlFor="fullName">Full Name *</label>
                   <input

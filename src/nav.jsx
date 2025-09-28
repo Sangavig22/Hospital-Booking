@@ -1,25 +1,17 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from 'react';
-import { Bell, Globe, Search, Menu, X } from 'lucide-react';
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef,useContext} from 'react';
+import { Bell, Search, Menu, X, User, ChevronDown } from 'lucide-react';
+import { AppContent } from "./content/AppContent";
 import logo from './assets/logo.png';
 import styles from './Nav.module.css';
 
 function Navbar() {
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  const toggleLanguageDropdown = () => {
-    console.log('Toggle clicked, current state:', isLanguageOpen);
-    setIsLanguageOpen(!isLanguageOpen);
-  };
-
-  const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language);
-    setIsLanguageOpen(false);
-    console.log(`${language} selected`);
-  };
+ const[showMenu,setShowMenu]=useState(false);
+const { token, setToken } = useContext(AppContent);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -29,13 +21,13 @@ function Navbar() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsLanguageOpen(false);
+        setShowMenu(false);
       }
     };
 
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
-        setIsLanguageOpen(false);
+        setShowMenu(false);
       }
     };
 
@@ -54,7 +46,7 @@ function Navbar() {
         {/* Logo & Brand */}
         <div className={styles.logoSection}>
           <div>
-            <img src={logo} alt="logo" className={styles.logoImage} />
+            <img onClick={() => navigate('/')} src={logo} alt="logo" className={styles.logoImage} />
           </div>
           <span className={styles.brandName}>HealthSync</span>
         </div>
@@ -86,6 +78,7 @@ function Navbar() {
         <div className={`${styles.navMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
           <Link to="/" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
           <Link to="/about" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+          <Link to="/doctors" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Doctors</Link>
           <Link to="/contact" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
           <Link to="/services" className={styles.navLink} onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
         </div>
@@ -96,64 +89,36 @@ function Navbar() {
           <button className={styles.notificationButton}>
             <Bell className={styles.notificationIcon} />
           </button>
-
-          {/* Language Dropdown */}
-          <div 
-            className={styles.languageDropdown} 
-            ref={dropdownRef}
-          >
-            <button 
-              onClick={toggleLanguageDropdown}
-              className={styles.languageButton}
-              aria-expanded={isLanguageOpen}
-              aria-haspopup="true"
-            >
-              <Globe className={styles.languageIcon} />
-              {selectedLanguage}
-              <svg 
-                className={`${styles.dropdownArrow} ${isLanguageOpen ? styles.arrowRotated : ''}`} 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <ul className={styles.languageList} role="menu" style={{ display: isLanguageOpen ? 'block' : 'none' }}>
-              <li className={styles.languageItem} role="none">
-                <button 
-                  className={`${styles.languageLink} ${selectedLanguage === 'English' ? styles.selectedLanguage : ''}`}
-                  onClick={() => handleLanguageSelect('English')}
-                  role="menuitem"
-                >
-                  English
+           {/* Create Account Button */}
+          <div>
+            {
+              token 
+              ?<div ref={dropdownRef}> 
+                <button className={styles.notificationButton} onClick={() => setShowMenu(!showMenu)}>
+                  <User className={styles.notificationIcon} />
+                  <ChevronDown className={styles.notificationIcon} />
                 </button>
-              </li>
-              <li className={styles.languageItem} role="none">
-                <button 
-                  className={`${styles.languageLink} ${selectedLanguage === 'Tamil' ? styles.selectedLanguage : ''}`}
-                  onClick={() => handleLanguageSelect('Tamil')}
-                  role="menuitem"
-                >
-                  Tamil
-                </button>
-              </li>
-              <li className={styles.languageItem} role="none">
-                <button 
-                  className={`${styles.languageLink} ${selectedLanguage === 'Sinhala' ? styles.selectedLanguage : ''}`}
-                  onClick={() => handleLanguageSelect('Sinhala')}
-                  role="menuitem"
-                >
-                  Sinhala
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Login Button */}
-          <Link to="/login" className={styles.loginButton} onClick={() => setIsMobileMenuOpen(false)}>
-            Login
+                
+                {showMenu && (
+                  <div className={styles.profileDropdown}>
+                    <Link to="/my-profile" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
+                      My Profile
+                    </Link>
+                    <Link to="/my-appointment" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
+                      My Appointments
+                    </Link>
+                    <button onClick={() => {setToken(false); setShowMenu(false);}}>
+                      Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+              :  <Link to="/login" className={styles.loginButton} onClick={() => setIsMobileMenuOpen(false)}>
+            Create Account
           </Link>
+            }
+        
+          </div>
         </div>
       </div>
     </nav>

@@ -167,151 +167,19 @@
   color: #1e293b;
 }
 
-/* Language Dropdown - COMPLETELY REWRITTEN FOR BETTER UX */
-.languageDropdown {
-  position: relative;
-  /* CRITICAL FIX: Extremely high z-index */
-  z-index: 9999;
-}
 
-.languageButton {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid #d1f5f5;
-  color: #1e293b;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  /* Enhanced visual appearance */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
 
-.languageButton:hover {
-  background-color: white;
-  border-color: #14b8a6;
-  box-shadow: 0 4px 8px rgba(20, 184, 166, 0.15);
-  transform: translateY(-1px);
-}
 
-.languageButton:focus {
-  outline: none;
-  border-color: #14b8a6;
-  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-}
 
-.languageIcon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.5rem;
-  flex-shrink: 0;
-}
 
-.dropdownArrow {
-  width: 1rem;
-  height: 1rem;
-  margin-left: 0.5rem;
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
 
-.arrowRotated {
-  transform: rotate(180deg);
-}
 
-/* CRITICAL IMPROVEMENTS: Language List Dropdown */
-.languageList {
-  position: absolute;
-  /* CRITICAL FIX: More space and better positioning */
-  top: calc(100% + 12px);
-  right: 0;
-  background-color: white;
-  /* CRITICAL FIX: Much stronger shadow for clear separation */
-  box-shadow: 
-    0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  padding: 8px 0;
-  min-width: 160px;
-  /* CRITICAL FIX: Extremely high z-index */
-  z-index: 10000;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  display: block;
-  list-style: none;
-  margin: 0;
-  /* Enhanced visual effects */
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
 
-/* Better hidden state handling */
-.languageList[style*="display: none"] {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px) scale(0.95);
-  pointer-events: none;
-}
 
-.languageItem {
-  list-style: none;
-}
 
-.languageLink {
-  display: block;
-  width: 100%;
-  padding: 12px 16px;
-  color: #1e293b;
-  text-decoration: none;
-  background: none;
-  border: none;
-  text-align: left;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  font-size: 0.9rem;
-  font-weight: 500;
-  line-height: 1.4;
-}
 
-.languageLink:hover {
-  background-color: #f0fdfa;
-  color: #14b8a6;
-  transform: translateX(2px);
-}
 
-.languageLink:focus {
-  outline: none;
-  background-color: #f0fdfa;
-  color: #14b8a6;
-  box-shadow: inset 0 0 0 2px rgba(20, 184, 166, 0.2);
-}
 
-.selectedLanguage {
-  background-color: #f0fdfa;
-  color: #14b8a6;
-  font-weight: 600;
-  position: relative;
-}
-
-.selectedLanguage::after {
-  content: "✓";
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: bold;
-  color: #14b8a6;
-  font-size: 14px;
-}
 
 /* Login Button */
 .loginButton {
@@ -330,8 +198,49 @@
 
 .loginButton:hover {
   background: linear-gradient(135deg, #0d9488 0%, #239F97 50%, #14b8a6 100%);
+  color: #ffffff; /* Ensures text stays white on hover */
   transform: translateY(-1px);
   box-shadow: 0 4px 8px rgba(35, 159, 151, 0.4);
+}
+
+/* Profile Dropdown Menu */
+.profileDropdown {
+  min-width: 12rem; /* min-w-48 */
+  background-color: #f5f5f4; /* bg-stone-100 */
+  border-radius: 0.375rem; /* rounded */
+  display: flex; /* flex */
+  flex-direction: column; /* flex-col */
+  gap: 1rem; /* gap-4 */
+  padding: 1rem; /* p-4 */
+  position: absolute; /* absolute */
+  top: calc(100% + 8px); /* Position below the button */
+  right: 0; /* right-0 */
+  font-size: 1rem; /* text-base */
+  line-height: 1.5rem; /* text-base */
+  font-weight: 500; /* font-medium */
+  color: #6b7280; /* text-gray */
+  z-index: 20; /* z-20 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+/* Dropdown Links */
+.profileDropdown a,
+.profileDropdown button {
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: #374151;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: color 0.2s ease;
+}
+
+.profileDropdown a:hover,
+.profileDropdown button:hover {
+  color: #14b8a6;
 }
 
 /* Mobile responsiveness improvements */
@@ -651,4 +560,6 @@
     height: 1rem;
     left: 0.6rem;
   }
+
+
 }
