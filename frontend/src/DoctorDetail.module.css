@@ -9,7 +9,7 @@
 .dateButton {
   background: #f1f5fa;
   color:#0d9488;
-  border: none;
+  border: 2px solid #0d9488;
   border-radius: 14px;
   padding: 14px 28px;
   font-size: 1.08rem;
@@ -20,34 +20,33 @@
 }
 
 .selectedDateButton {
-  background: #222;
-  color: #f1f5fa;
-  border: none;
+  background:#0d9488;
+  color: #fff;
   border-radius: 14px;
   padding: 14px 28px;
   font-size: 1.08rem;
   font-weight: 500;
   cursor: pointer;
   margin-bottom: 6px;
-  box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+  box-shadow: 0 2px 8px rgba(226, 226, 226, 0.1);
 }
 
 .noSlots {
-  color: #888;
+  color: #000000;
   font-size: 1rem;
   padding: 10px 0;
 }
 /* Date display for doctor details */
 .date {
   font-size: 1.05rem;
-  color: #225ea8;
+  color: #0d9488;
   margin-bottom: 10px;
   margin-top: 2px;
+  width: auto;
 }
 /* Booking section below doctor details */
 .bookingSection {
   margin-top: 36px;
-  
   padding: 28px 24px 24px 24px;
   display: flex;
   flex-direction: column;
@@ -55,9 +54,9 @@
 }
 
 .bookingHeader {
-  font-size: 1.15rem;
+  font-size: 1.45rem;
   font-weight: 600;
-  color:#1a365d;
+  color:black;
   margin-bottom: 18px;
 }
 
@@ -71,7 +70,7 @@
 
 .slotButton {
   background: #f1f5fa;
-  color:#0d9488;
+  color: #0d9488;
   border: none;
   border-radius: 8px;
   padding: 10px 18px;
@@ -79,15 +78,18 @@
   font-weight: 500;
   cursor: pointer;
   transition: background 0.18s, color 0.18s;
+  width: auto;
 }
 .slotButton:hover, .slotButton.selected {
-  background:#0d9488;
+  background: linear-gradient(90deg, #0d9488 60%,#0d9488 100%);
   color: #fff;
+  border: none;
+  border:1px solid white
 }
 
 .bookButton {
   margin-top: 10px;
-  background: linear-gradient(90deg, #225ea8 60%, #38b6ff 100%);
+  margin-left: 16px;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -111,9 +113,9 @@
   padding: 35px 32px 28px 32px;
   background: #f9fbfd;
   border-radius: 20px;
-  box-shadow: 0 6px 32px rgba(30, 64, 175, 0.10);
+
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #1a365d;
+  color: #0d9488;
   transition: box-shadow 0.2s;
   overflow: visible;
   min-width: 0;
@@ -157,44 +159,47 @@
 
 /* Doctor name */
 .doctorName {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
+ 	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 8px;
+	color: #000000;
 }
 
 /* Meta information */
 .meta {
   font-size: 16px;
-  color: #666;
+  color: #000000;
   margin-bottom: 20px;
+  font-size: 1.05rem;
 }
 
 /* About section */
 .aboutSection {
-  text-align: left;
+ 
   background-color: #f8f9fa;
   padding: 15px 20px;
   border-radius: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 1.15rem;
 }
 
 .aboutSection strong {
   display: block;
   margin-bottom: 8px;
-  font-size: 18px;
+  font-size: 1.25rem;
 }
 
 /* Appointment fee styling */
 .fee {
   margin-top: 15px;
-  font-size: 16px;
-  color: #333;
+  font-size: 1.25rem;
+  color: #000000;
 }
 
 /* Booking slots list */
 .bookingSlots {
-  margin-top: 15px;
+ margin-top: 10px;
 }
 
 .bookingSlots ul {
@@ -205,21 +210,27 @@
 .bookingSlots li {
   margin-bottom: 5px;
   font-size: 15px;
-  color: #555;
+  color:white;
+
 }
 
 /* Back button */
 .backButton {
   display: inline-block;
   margin-top: 20px;
+  margin-left: 16px;
   padding: 8px 15px;
-  background-color: #007BFF;
+  background-color:#0d9488;
   color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
+  width: auto;
+  min-height: 30px;
+  border-radius: 10px;
   transition: background-color 0.3s;
 }
 
 .backButton:hover {
-  background-color: #0056b3;
+ background: linear-gradient(90deg, #0d9488 60%,#0d9488 100%);
+ color:white;
+
+
 }

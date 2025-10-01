@@ -1,5 +1,5 @@
 import doctorDetails from "./DoctorDetail"; 
-import { useParams, Link } from "react-router-dom"; 
+import { useParams, Link, useNavigate } from "react-router-dom"; 
 import { useState } from "react";
 import styles from './DoctorDetail.module.css'; 
 import photo1 from './assets/id 1.jpeg'; 
@@ -19,7 +19,9 @@ const DoctorDetails = () => {
   const [selectedDate, setSelectedDate] = useState(
     doctor && doctor.bookingDates ? Object.keys(doctor.bookingDates)[0] : null
   );
-  if (!doctor) return <div className={styles.detailContainer}><h2>Doctor not found</h2></div>;
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const navigate = useNavigate();
+
   const dateKeys = doctor.bookingDates ? Object.keys(doctor.bookingDates) : [];
   const slots = selectedDate && doctor.bookingDates ? doctor.bookingDates[selectedDate] : [];
   return (
@@ -45,7 +47,10 @@ const DoctorDetails = () => {
             <button
               key={date}
               className={selectedDate === date ? styles.selectedDateButton : styles.dateButton}
-              onClick={() => setSelectedDate(date)}
+              onClick={() => {
+                setSelectedDate(date);
+                setSelectedSlot(null); // reset slot when date changes
+              }}
             >
               {date}
             </button>
@@ -54,13 +59,33 @@ const DoctorDetails = () => {
         <div className={styles.slotsRow}>
           {slots && slots.length > 0 ? (
             slots.map((slot, idx) => (
-              <button key={idx} className={styles.slotButton}>{slot}</button>
+              <button
+                key={idx}
+                className={
+                  selectedSlot === slot
+                    ? `${styles.slotButton} ${styles.selected}`
+                    : styles.slotButton
+                }
+                onClick={() => setSelectedSlot(slot)}
+              >
+                {slot}
+              </button>
             ))
           ) : (
             <span className={styles.noSlots}>No slots available</span>
           )}
         </div>
-        <Link to="/doctors" className={styles.backButton} style={{marginLeft: 16}}>← Back to Doctors</Link>
+        {selectedSlot && (
+            <button
+              className={styles.bookButton}
+              onClick={() => {
+                navigate(`/book/${doctor.id}?date=${encodeURIComponent(selectedDate)}&time=${encodeURIComponent(selectedSlot)}`);
+              }}
+            >
+              Book Appointment
+            </button>
+        )}
+          <Link to="/doctors" className={styles.backButton}>← Back to Doctors</Link>
       </div>
     </div>
   );

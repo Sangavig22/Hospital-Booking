@@ -1,4 +1,5 @@
 import React, { useState, useEffect,useContext } from 'react';
+import { Car, Train, MapPin, Phone, Mail, Hospital, Clock } from 'lucide-react';
 import styles from './contact.module.css';
 import axios from 'axios';
 import {toast} from 'react-toastify';
@@ -49,7 +50,15 @@ const onSubmitHandler = async (e) => {
     );
     if (data.success) {
       toast.success(data.message);
-     
+      setIsVisible(false);
+      setFormData({
+        fullName: '',
+        emailAddress: '',
+        phoneNumber: '',
+        inquiryType: '',
+        message: ''
+      });
+
     } else {
       toast.error(data.message);
     }
@@ -196,8 +205,8 @@ const onSubmitHandler = async (e) => {
                 </p>
               </div>
               <div className={styles.locationOptions}>
-                <span className={styles.locationFeature}>🚗 Parking available on site</span>
-                <span className={styles.locationFeature}>🚇 Accessible by metro</span>
+                <span className={styles.locationFeature}><Car size={18} style={{verticalAlign:'middle',marginRight:6}} />Parking available on site</span>
+                <span className={styles.locationFeature}><Train size={18} style={{verticalAlign:'middle',marginRight:6}} />Accessible by metro</span>
               </div>
             </div>
           </div>
@@ -208,7 +217,7 @@ const onSubmitHandler = async (e) => {
             
             <div className={styles.contactInfo}>
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
-                <div className={styles.infoIcon}>📍</div>
+                <div className={styles.infoIcon}><MapPin size={18} /></div>
                 <div className={styles.infoDetails}>
                   <h4>Office Address</h4>
                   <p>123 Hospital Road<br />
@@ -218,7 +227,7 @@ const onSubmitHandler = async (e) => {
               </div>
 
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
-                <div className={styles.infoIcon}>📞</div>
+                <div className={styles.infoIcon}><Phone size={18} /></div>
                 <div className={styles.infoDetails}>
                   <h4>Phone Numbers</h4>
                   <p>Main:(+94) 123-4567<br />
@@ -228,7 +237,7 @@ const onSubmitHandler = async (e) => {
               </div>
 
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
-                <div className={styles.infoIcon}>✉️</div>
+                <div className={styles.infoIcon}><Mail size={18} /></div>
                 <div className={styles.infoDetails}>
                   <h4>Email Addresses</h4>
                   <p>General: info@healthsync.com<br />
@@ -237,7 +246,7 @@ const onSubmitHandler = async (e) => {
                 </div>
               </div>
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
-  <div className={styles.infoIcon}>🏥</div>
+  <div className={styles.infoIcon}><Hospital size={18} /></div>
   <div className={styles.infoDetails}>
     <h4>Hospital Service Hours</h4>
     <p>Open 24/7</p>
@@ -245,7 +254,7 @@ const onSubmitHandler = async (e) => {
 </div>
 
               <div className={`${styles.infoItem} ${styles.hoverable}`}>
-                <div className={styles.infoIcon}>🕒</div>
+                <div className={styles.infoIcon}><Clock size={18} /></div>
                 <div className={styles.infoDetails}>
                   <h4>Pharmacy Service Hours</h4>
                   <p> 8 AM - 6 PM EST<br />

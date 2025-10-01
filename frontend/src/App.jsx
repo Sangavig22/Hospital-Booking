@@ -15,6 +15,7 @@ import Appionment from "./Appionment.jsx";
 import { AppContentProvider } from './content/AppContent.jsx';
 import { ToastContainer } from 'react-toastify';
 import DoctorDetails from "./DoctorDetails.jsx";
+import BookAppointment from "./BookAppointment.jsx";
 function App() {
   const [count, setCount] = useState(0)
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/my-appointment" element={<MyAppoinment/>}/>
         <Route path="/appointment/:doctorid" element={<MyAppoinment/>}/>
   <Route path="/doctorDetails/:id" element={<DoctorDetails/>}/>
+  <Route path="/book/:id" element={<BookAppointment/>}/>
       </Routes>
       <Footer />
     

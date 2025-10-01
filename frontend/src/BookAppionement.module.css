@@ -1,0 +1,266 @@
+.detailContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+/* Book Button Styles */
+.bookButton {
+	margin-top: 10px;
+	padding: 12px 40px;
+	min-width: 160px;
+	background-color: #0d9488;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	font-size: 1.08rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.18s, box-shadow 0.18s;
+	box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+}
+.bookButton:hover, .bookButton:focus {
+	background-color: #0b7c6a;
+	outline: none;
+}
+/* Form Header for BookAppointment */
+.formHeader {
+	font-weight: 600;
+	font-size: 2rem;
+	color: #000000;
+	margin-bottom: 10px;
+	text-align: center;
+}
+/* Doctor Info Card Styles for BookAppointment */
+.doctorCard {
+	display: flex;
+	align-items: flex-start;
+	gap: 36px;
+	background: #f9fbfd;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px rgba(13, 148, 136, 0.10);
+	padding: 32px 28px 24px 28px;
+	margin-bottom: 32px;
+	max-width: 800px;
+	width: 100%;
+}
+
+.doctorPhoto {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 16px;
+	border: 2px solid #e3e8f0;
+	box-shadow: 0 2px 8px rgba(13, 148, 136, 0.10);
+	flex-shrink: 0;
+}
+
+.doctorDetails {
+	flex: 1 1 0;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.doctorName {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 8px;
+	color: #000000;
+}
+
+.doctorMeta {
+	font-size: 1.05rem;
+	color: #000000;
+	margin-bottom: 18px;
+}
+
+.appointmentHeader {
+	font-weight: 600;
+	color: #000000;
+	margin-bottom: 8px;
+	font-size: 1.25rem;
+}
+
+.appointmentInfo {
+	font-size: 1.15rem;
+	color: #000000;
+	background: #f1f5fa;
+	border-radius: 10px;
+	padding: 16px 22px;
+	margin-bottom: 18px;
+	box-shadow: 0 1px 4px rgba(13, 148, 136, 0.07);
+	display: flex;
+	flex-direction: row;
+	gap: 32px;
+	justify-content: flex-start;
+	align-items: center;
+	width: fit-content;
+}
+/* Doctor Info Styles for BookAppointment */
+.doctorInfo {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 20px;
+	width: 100%;
+	gap: 18px;
+}
+
+
+
+.appointmentForm {
+	margin-top: 18px;
+	font-size: 1.5rem;
+	width: 100%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background: #f8fafc;
+	padding: 24px 18px 18px 18px;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	width: 100%;
+	align-items: flex-start;
+}
+
+.appointmentForm label {
+	font-weight: 500;
+	color: black;
+	margin-bottom: 4px;
+	margin-left: 2px;
+	font-size: 1.15rem;
+}
+
+.appointmentForm input,
+.appointmentForm textarea {
+	padding: 10px 14px;
+	border: 1.5px solid #e3e8f0;
+	border-radius: 6px;
+	font-size: 1rem;
+	background: #fff;
+	color: #222;
+	border: 1px solid #0b7c6a;
+	outline: none;
+	transition: border 0.18s;
+	width: 100%;
+	box-sizing: border-box;
+}
+.appointmentForm input:focus,
+.appointmentForm textarea:focus {
+	border-color: #0d9488;
+}
+
+.confirmMsg {
+	margin-top: 18px;
+	background: #e0f7f4;
+	color:black;
+	padding: 12px 18px;
+	border-radius: 8px;
+	font-weight: 500;
+	font-size: 1.08rem;
+	box-shadow: 0 1px 4px rgba(13, 148, 136, 0.07);
+}
+	.confirmMsg {
+		margin-top: 18px;
+		background: #e6fbe8;
+		color: #178a3d;
+		padding: 12px 18px;
+		border-radius: 8px;
+		font-weight: 500;
+		font-size: 1.08rem;
+		box-shadow: 0 1px 4px rgba(23, 138, 61, 0.07);
+	}
+
+.detailContainer {
+	max-width: 900px;
+	margin: 60px auto;
+	padding: 32px 28px 24px 28px;
+	background: #f9fbfd;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px rgba(13, 148, 136, 0.10);
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #000000;
+	min-width: 0;
+	flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.profileSection {
+	display: flex;
+	flex-direction: row;
+	gap: 28px;
+	align-items: flex-start;
+	margin-bottom: 24px;
+}
+
+
+
+.infoSection {
+	flex: 1 1 0;
+	min-width: 0;
+}
+
+
+
+.bookingSection {
+	margin-top: 40px;
+	padding: 32px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.bookingHeader {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #000000;
+	margin-bottom: 22px;
+	margin-top: 10px;
+	letter-spacing: 0.5px;
+}
+
+.appointmentDetails {
+	font-size: 1.08rem;
+	color: #000000;
+	background: #f1f5fa;
+	border-radius: 10px;
+	padding: 16px 22px;
+	margin-bottom: 18px;
+	box-shadow: 0 1px 4px rgba(13, 148, 136, 0.07);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 32px;
+}
+
+.backButton {
+	display: inline-block;
+	margin-top: 10px;
+	padding: 8px 15px;
+	background-color: #0d9488;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.2s;
+	font-weight: 500;
+	font-size: 1rem;
+}
+.backButton:hover {
+	background-color: #0b7c6a;
+}
