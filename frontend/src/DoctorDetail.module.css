@@ -1,0 +1,325 @@
+/* Date selection row for booking slots */
+.datesRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  justify-content: center;
+}
+
+.dateButton {
+  background: #f1f5fa;
+  color:#0d9488;
+  border: 2px solid #0d9488;
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-size: 1.08rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  margin-bottom: 6px;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.selectedDateButton {
+  background:#0d9488;
+  color: #fff;
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-size: 1.08rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px rgba(226, 226, 226, 0.1);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.noSlots {
+  color: #000000;
+  font-size: 1rem;
+  padding: 10px 0;
+}
+/* Date display for doctor details */
+.date {
+  font-size: 1.05rem;
+  color: #0d9488;
+  margin-bottom: 10px;
+  margin-top: 2px;
+  width: auto;
+}
+/* Booking section below doctor details */
+.bookingSection {
+  margin-top: 36px;
+  padding: 28px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bookingHeader {
+  font-size: 1.45rem;
+  font-weight: 600;
+  color:black;
+  margin-bottom: 18px;
+}
+
+/* Hint prompting user to select a time slot */
+.selectHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px dashed #cbd5e1;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.hintArrow {
+  display: inline-block;
+  animation: nudge 1.2s ease-in-out infinite;
+}
+.hintText {
+  font-size: 0.95rem;
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+@keyframes fadePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.slotsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 22px;
+  justify-content: center;
+}
+
+/* Enhance Book button hover */
+.bookButton:hover {
+  background-color: #0b7c6a;
+  outline: none;
+}
+
+.slotButton {
+  background: #f1f5fa;
+  color: #0d9488;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  width: auto;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.slotButton:hover, .slotButton.selected {
+  background: linear-gradient(90deg, #0d9488 60%,#0d9488 100%);
+  color: #fff;
+  border: none;
+  border:1px solid white
+}
+
+.bookButton {
+  margin-top: 10px;
+  padding: 12px 40px;
+  min-width: 160px;
+  background-color: #0d9488;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, box-shadow 0.18s;
+  box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+/* Remove default focus outlines across buttons */
+.dateButton:focus,
+.dateButton:focus-visible,
+.dateButton:active,
+.selectedDateButton:focus,
+.selectedDateButton:focus-visible,
+.selectedDateButton:active,
+.slotButton:focus,
+.slotButton:focus-visible,
+.slotButton:active,
+.bookButton:focus,
+.bookButton:focus-visible,
+.bookButton:active {
+  outline: none;
+  box-shadow: none;
+}
+.bookButton:hover {
+  background-color: #0b7c6a;
+}
+/* DoctorDetail.module.css */
+
+/* Container for the entire doctor detail page */
+.detailContainer {
+  max-width: 950px;
+  margin: 48px auto;
+  padding: 35px 32px 28px 32px;
+  background: #f9fbfd;
+  border-radius: 20px;
+
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #0d9488;
+  transition: box-shadow 0.2s;
+  overflow: visible;
+  min-width: 0;
+  margin-top: 100px;
+ 
+}
+
+
+/* Profile section containing image and doctor info */
+.profileSection {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  min-width: 0;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Responsive layout for doctor details */
+@media (max-width: 768px) {
+  .detailContainer {
+    padding: 24px 18px;
+    margin: 32px auto;
+  }
+  .profileSection {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .doctorPhoto {
+    max-width: 220px;
+    margin-right: 0;
+  }
+  .doctorName {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+  .meta { text-align: center; }
+  .aboutSection { font-size: 1rem; }
+  .bookingSection { padding: 18px; }
+  .datesRow { flex-wrap: wrap; }
+}
+
+/* Doctor image */
+.doctorPhoto {
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 3 / 4;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 16px;
+  border: 3px solid #e3e8f0;
+  box-shadow: 0 4px 16px rgba(30, 64, 175, 0.10);
+  margin-right: 32px;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* Info section (name, qualifications, specialty, etc.) */
+.infoSection {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Doctor name */
+.doctorName {
+ 	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 8px;
+	color: #000000;
+}
+
+/* Meta information */
+.meta {
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 20px;
+  font-size: 1.05rem;
+}
+
+/* About section */
+.aboutSection {
+ 
+  background-color: #f8f9fa;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  color: #000000;
+  font-size: 1.15rem;
+}
+
+.aboutSection strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+}
+
+/* Appointment fee styling */
+.fee {
+  margin-top: 15px;
+  font-size: 1.25rem;
+  color: #000000;
+}
+
+/* Booking slots list */
+.bookingSlots {
+ margin-top: 10px;
+}
+
+.bookingSlots ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.bookingSlots li {
+  margin-bottom: 5px;
+  font-size: 15px;
+  color:white;
+
+}
+
+/* Back button */
+.backButton {
+  display: inline-block;
+  margin-top: 20px;
+  margin-left: 16px;
+  padding: 8px 15px;
+  background-color:#0d9488;
+  color: #fff;
+  width: auto;
+  min-height: 30px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+ background: linear-gradient(90deg, #0d9488 60%,#0d9488 100%);
+
+
+
+}

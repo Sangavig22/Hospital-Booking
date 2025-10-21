@@ -1,0 +1,153 @@
+/* Section Title for Featured Doctors */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 1s ease forwards;
+}
+
+.fadeInDown {
+  animation: fadeInDown 1s ease forwards;
+}
+
+/* Header */
+.header {
+  margin-top: 2.5rem;
+  background:  linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  padding: 0.5rem 0.5rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;   
+}
+
+.headerTitle {
+  padding: 1rem 1.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.1rem;
+}
+
+.headerSubtitle {
+  margin-top:0.1rem;
+  margin-bottom:3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  
+}
+
+.doctorCard:hover {
+	box-shadow: 0 6px 32px rgba(30, 64, 175, 0.16);
+}
+
+.doctorHeader {
+	display: flex;
+	align-items: center;
+	margin-bottom: 12px;
+}
+
+
+.doctorCard {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 2px 16px rgba(30, 64, 175, 0.08);
+	padding: 28px 22px 22px 22px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+	transition: box-shadow 0.2s;
+	width: 100%;
+	min-height: 350px;
+	box-sizing: border-box;
+    
+}
+
+.doctorPhoto {
+	width: 100%;
+	aspect-ratio: 3 / 4;
+	height: auto;
+	object-fit: cover;
+	object-position: top center;
+	border-radius: 10%;
+	margin: 0 auto 18px auto;
+	display: block;
+	box-shadow: 0 2px 8px rgba(30, 64, 175, 0.10);
+	border: 3px solid white;
+}
+.doctorsGrid {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 32px 24px;
+	justify-items: center;
+	align-items: stretch;
+   
+	
+	
+}
+
+/* Responsive column counts */
+@media (max-width: 1280px) {
+	.doctorsGrid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 992px) {
+	.doctorsGrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+	.doctorsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 480px) {
+	.doctorsGrid { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+}
+.bookNowButton:hover {
+	background: #225ea8;
+}
+.bookIcon {
+	width: 20px;
+	height: 20px;
+}
+.doctorName {
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #1a365d;
+	margin: 0 0 6px 0;
+	text-align: center;
+}
+
+.availabilityDot {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	border: 2px solid #fff;
+	box-shadow: 0 0 0 2px #e3e8f0;
+}
+
+.doctorSpecialty {
+	color: #3182ce;
+	font-size: 1rem;
+	margin: 0 0 4px 0;
+	text-align: center;
+}
+
