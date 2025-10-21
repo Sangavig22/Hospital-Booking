@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef,useContext} from 'react';
-import { Bell, Search, Menu, X, User, ChevronDown } from 'lucide-react';
+import { Search, Menu, X, User, ChevronDown } from 'lucide-react';
 import { AppContent } from "./content/AppContent";
 import logo from './assets/logo.png';
 import styles from './Nav.module.css';
@@ -20,8 +20,13 @@ const { token, setToken } = useContext(AppContent);
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShowMenu(false);
+      // Check if click is outside both the button and dropdown
+      if (showMenu && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        // Also check if click is not on the dropdown itself
+        const dropdownElement = document.querySelector('.profileDropdown');
+        if (dropdownElement && !dropdownElement.contains(event.target)) {
+          setShowMenu(false);
+        }
       }
     };
 
@@ -38,7 +43,7 @@ const { token, setToken } = useContext(AppContent);
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
-  }, []);
+  }, [showMenu]);
 
   return (
     <nav className={styles.navbar}>
@@ -85,42 +90,40 @@ const { token, setToken } = useContext(AppContent);
 
         {/* Right Elements */}
         <div className={`${styles.rightElements} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
-          {/* Notification Bell */}
-          <button className={styles.notificationButton}>
-            <Bell className={styles.notificationIcon} />
-          </button>
-           {/* Create Account Button */}
-          <div>
+          {/* User Account Dropdown */}
+          <div className={styles.userAccountSection}>
             {
               token 
-              ?<div ref={dropdownRef}> 
-                <button className={styles.notificationButton} onClick={() => setShowMenu(!showMenu)}>
-                  <User className={styles.notificationIcon} />
-                  <ChevronDown className={styles.notificationIcon} />
-                </button>
-                
-                {showMenu && (
-                  <div className={styles.profileDropdown}>
-                    <Link to="/my-profile" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
-                      My Profile
-                    </Link>
-                    <Link to="/my-appointment" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
-                      My Appointments
-                    </Link>
-                    <button onClick={() => {setToken(false); setShowMenu(false);}}>
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
-              :  <Link to="/login" className={styles.loginButton} onClick={() => setIsMobileMenuOpen(false)}>
-            Create Account
-          </Link>
+              ? <div ref={dropdownRef} className={styles.userDropdownContainer}> 
+                  <button className={styles.userAccountButton} onClick={() => setShowMenu(!showMenu)}>
+                    <User className={styles.userIcon} />
+                    <ChevronDown className={styles.chevronIcon} />
+                  </button>
+                </div>
+              : <Link to="/login" className={styles.loginButton} onClick={() => setIsMobileMenuOpen(false)}>
+                  Create Account
+                </Link>
             }
-        
           </div>
         </div>
       </div>
+
+      {/* User Dropdown - Outside navbar */}
+      {token && showMenu && (
+        <div className={styles.profileDropdownOuter}>
+          <div className={styles.profileDropdown}>
+            <Link to="/my-profile" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
+              My Profile
+            </Link>
+            <Link to="/my-appointment" onClick={() => {setShowMenu(false); setIsMobileMenuOpen(false);}}>
+              My Appointments
+            </Link>
+            <button onClick={() => {setToken(false); setShowMenu(false);}}>
+              Logout
+            </button>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

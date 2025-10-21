@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
 import Background from './assets/Background.jpg';
 import styles from './Home.module.css';
 
 function Home() {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user } = useAuth();
 
   useEffect(() => {
     // Trigger animations on component mount
@@ -32,8 +37,11 @@ function Home() {
   }, []);
 
   const handleBookingClick = () => {
-    // Add your booking logic here
-    console.log('Booking appointment...');
+    if (!user) {
+      navigate('/login', { state: { from: { pathname: '/doctors' } } });
+    } else {
+      navigate('/doctors');
+    }
   };
 
   const handleEmergencyCall = () => {
@@ -47,7 +55,7 @@ function Home() {
       name: "Dr. Samantha Perera",
       specialty: "General Medicine",
       hospital: "National Hospital Colombo",
-      experience: "15 years experience",
+      experience: "8 years experience",
       availability: "Today 2:00 PM",
       isAvailable: true
     },
@@ -56,7 +64,7 @@ function Home() {
       name: "Dr. Rajesh Jayawardene",
       specialty: "Dermatology",
       hospital: "Nawaloka Hospital",
-      experience: "10 years experience",
+      experience: "12 years experience",
       availability: "Today 4:00 PM",
       isAvailable: true
     },
@@ -65,7 +73,7 @@ function Home() {
       name: "Dr. Priya Fernando",
       specialty: "Pediatrics",
       hospital: "Asiri Hospital Kandy",
-      experience: "12 years experience",
+      experience: "10 years experience",
       availability: "Tomorrow 11:00 AM",
       isAvailable: false
     },
@@ -74,7 +82,7 @@ function Home() {
       name: "Dr. Rohan Silva",
       specialty: "Cardiology",
       hospital: "Lanka Hospital Colombo",
-      experience: "18 years experience",
+      experience: "15 years experience",
       availability: "Tomorrow 9:00 AM",
       isAvailable: true
     },
@@ -83,7 +91,7 @@ function Home() {
       name: "Dr. Nuwan Gunawardena",
       specialty: "Orthopedics",
       hospital: "Durdans Hospital",
-      experience: "14 years experience",
+      experience: "11 years experience",
       availability: "Today 5:30 PM",
       isAvailable: true
     },
@@ -92,7 +100,7 @@ function Home() {
       name: "Dr. Kavitha Mendis",
       specialty: "Gynecology",
       hospital: "Apollo Hospital",
-      experience: "16 years experience",
+      experience: "14 years experience",
       availability: "Tomorrow 2:00 PM",
       isAvailable: true
     }
@@ -245,7 +253,14 @@ function Home() {
                 <p className={styles.doctorAvailability}>Next available: {doctor.availability}</p>
                 <button 
                   className={styles.bookNowButton}
-                  onClick={() => console.log(`Booking with ${doctor.name}`)}
+                  onClick={() => {
+                    const target = `/doctorDetails/${doctor.id}`;
+                    if (!user) {
+                      navigate('/login', { state: { from: { pathname: target } } });
+                    } else {
+                      navigate(target);
+                    }
+                  }}
                 >
                   <svg className={styles.bookIcon} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />

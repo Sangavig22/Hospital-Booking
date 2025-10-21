@@ -4,17 +4,18 @@ import {AppContent} from "./content/AppContent";
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from './AuthContext.jsx';
 
 function LoginForm() {
+
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const [isAnimating, setIsAnimating] = useState(false);
 
 
 
-  const {backendUrl, isLoginMode, setIsLoginMode}=useContext(AppContent)
-  const { setToken } = useContext(AppContent);
+  const {backendUrl, isLoginMode, setIsLoginMode, setToken}=useContext(AppContent);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -39,10 +40,10 @@ useEffect(() => {
       if(!isLoginMode){
         const {data}=await axios.post(backendUrl+'/api/auth/register',{fullName,email,password,confirmPassword})
         if(data.success){
-          setIsLoginMode(true);
-           toast.success(data.message);
-             navigate("/");
-             setToken(true);
+          login({ email, fullName }); // automatically log in after signup
+          setToken(true); // Set token for navbar
+          toast.success(data.message);
+          navigate("/"); 
         }
         else{
           toast.error(data.message);
@@ -50,15 +51,27 @@ useEffect(() => {
       }
       else{
         const {data}=await axios.post(backendUrl+'/api/auth/login',{email,password})
-        
-        if(data.success){
-          setIsLoginMode(true);
-             toast.success(data.message);
-             navigate("/");
-              setToken(true);
+        if (data.success) {
+          // Update AuthContext
+          login({ email, fullName: fullName || "User" }); 
+          setToken(true); // Set token for navbar
+          
+          toast.success(data.message);
+          navigate("/"); 
         }
+        
         else{
-          toast.error(data.message);
+          const {data} = await axios.post(backendUrl+'/api/auth/login', {email, password});
+  
+          if(data.success){
+            login({ email }); // store user info
+            setToken(true); // Set token for navbar
+            toast.success(data.message);
+            navigate("/"); 
+          }
+          else{
+            toast.error(data.message);
+          }
         }
       }
 

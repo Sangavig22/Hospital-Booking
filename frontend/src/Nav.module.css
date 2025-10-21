@@ -147,7 +147,54 @@
   overflow: visible !important;
 }
 
-/* Notification Bell */
+/* User Account Section */
+.userAccountSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.userDropdownContainer {
+  position: relative;
+}
+
+.userAccountButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(20, 184, 166, 0.3);
+}
+
+.userAccountButton:hover {
+  background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.4);
+}
+
+.userIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: white;
+}
+
+.chevronIcon {
+  width: 1rem;
+  height: 1rem;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.userAccountButton:hover .chevronIcon {
+  transform: rotate(180deg);
+}
+
+/* Legacy notification styles for compatibility */
 .notificationButton {
   padding: 0.5rem;
   border-radius: 0.5rem;
@@ -203,31 +250,55 @@
   box-shadow: 0 4px 8px rgba(35, 159, 151, 0.4);
 }
 
+/* Profile Dropdown Outer Container */
+.profileDropdownOuter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  pointer-events: none;
+}
+
 /* Profile Dropdown Menu */
 .profileDropdown {
-  min-width: 12rem; /* min-w-48 */
-  background-color: #f5f5f4; /* bg-stone-100 */
-  border-radius: 0.375rem; /* rounded */
-  display: flex; /* flex */
-  flex-direction: column; /* flex-col */
-  gap: 1rem; /* gap-4 */
-  padding: 1rem; /* p-4 */
-  position: absolute; /* absolute */
-  top: calc(100% + 8px); /* Position below the button */
-  right: 0; /* right-0 */
-  font-size: 1rem; /* text-base */
-  line-height: 1.5rem; /* text-base */
-  font-weight: 500; /* font-medium */
-  color: #6b7280; /* text-gray */
-  z-index: 20; /* z-20 */
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  border: 1px solid #e5e7eb;
+  min-width: 14rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 100px; /* Position below navbar */
+  right: 20px; /* Position from right edge */
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  z-index: 1000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(20, 184, 166, 0.2);
+  animation: dropdownSlideIn 0.2s ease-out;
+  pointer-events: auto;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Dropdown Links */
 .profileDropdown a,
 .profileDropdown button {
-  padding: 0.5rem 0;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   color: #374151;
   background: none;
@@ -235,12 +306,23 @@
   text-align: left;
   cursor: pointer;
   font-size: 0.875rem;
-  transition: color 0.2s ease;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .profileDropdown a:hover,
 .profileDropdown button:hover {
   color: #14b8a6;
+  background: rgba(20, 184, 166, 0.1);
+}
+
+.profileDropdown button:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
 }
 
 /* Mobile responsiveness improvements */
@@ -250,6 +332,14 @@
     min-width: 140px;
     max-height: 60vh;
     overflow-y: auto;
+  }
+  
+  .profileDropdown {
+    top: 120px; /* Adjust for mobile navbar height */
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    width: auto;
   }
 }
 

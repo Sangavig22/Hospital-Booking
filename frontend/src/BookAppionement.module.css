@@ -128,6 +128,17 @@
 	box-shadow: 0 2px 8px rgba(13, 148, 136, 0.08);
 }
 
+/* Responsive layout for booking details */
+@media (max-width: 768px) {
+  .detailContainer { padding: 24px 18px; margin: 32px auto; }
+  .doctorCard { flex-direction: column; gap: 16px; align-items: center; }
+  .doctorPhoto { width: 180px; height: 220px; }
+  .doctorName { font-size: 1.6rem; text-align: center; }
+  .doctorMeta { font-size: 1rem; text-align: center; }
+  .appointmentInfo { flex-direction: column; gap: 10px; }
+  .appointmentForm { max-width: 100%; }
+}
+
 .formGroup {
 	display: flex;
 	flex-direction: column;

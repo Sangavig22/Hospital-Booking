@@ -23,7 +23,7 @@ let doctorDetails = [
     specialty: "Dermatology",
     qualification: "MD - Dermatology",
     experience: 12,
-    photo: "id 2.jpg",
+    photo: "id 3.jpg",
     about: "Dr. Rajesh specializes in skin care, cosmetic dermatology, and treating chronic skin conditions using modern techniques.",
     appointmentFee: 60,
     bookingDates: {
@@ -40,7 +40,7 @@ let doctorDetails = [
     specialty: "Pediatrics",
     qualification: "MD - Pediatrics",
     experience: 10,
-    photo: "id 3.jpeg",
+    photo: "id 11.jpg",
     about: "Dr. Priya is dedicated to children’s health, preventive care, and developmental guidance for infants and young children.",
     appointmentFee: 55,
     bookingDates: {
@@ -74,7 +74,7 @@ let doctorDetails = [
     specialty: "Orthopedics",
     qualification: "MS - Orthopedics",
     experience: 11,
-    photo: "id 1.jpeg",
+    photo: "id 5.jpg",
     about: "Dr. Nuwan focuses on bone, joint, and spine disorders with both surgical and non-surgical treatments.",
     appointmentFee: 65,
     bookingDates: {
@@ -108,7 +108,7 @@ let doctorDetails = [
     specialty: "Neurology",
     qualification: "MD - Neurology",
     experience: 13,
-    photo: "id 3.jpeg",
+    photo: "id 6.jpg",
     about: "Dr. Michael treats neurological disorders including epilepsy, stroke, and migraines with advanced therapies.",
     appointmentFee: 85,
     bookingDates: {
@@ -125,7 +125,7 @@ let doctorDetails = [
     specialty: "Gastroenterology",
     qualification: "MD - Gastroenterology",
     experience: 9,
-    photo: "id 4.jpeg",
+    photo: "id 9.jpg",
     about: "Dr. Ayesha specializes in digestive system disorders, liver diseases, and preventive gastroenterology.",
     appointmentFee: 75,
     bookingDates: {
@@ -142,7 +142,7 @@ let doctorDetails = [
     specialty: "Endocrinology",
     qualification: "MD - Endocrinology",
     experience: 16,
-    photo: "id 1.jpeg",
+    photo: "id 7.jpg",
     about: "Dr. Sunil manages diabetes, thyroid, and other hormonal disorders with patient-focused treatments.",
     appointmentFee: 90,
     bookingDates: {
@@ -176,7 +176,7 @@ let doctorDetails = [
     specialty: "Pulmonology",
     qualification: "MD - Pulmonology",
     experience: 12,
-    photo: "id 3.jpeg",
+    photo: "id 3.jpg",
     about: "Dr. Harsha specializes in treating lung and respiratory diseases including asthma and COPD.",
     appointmentFee: 70,
     bookingDates: {
@@ -193,7 +193,7 @@ let doctorDetails = [
     specialty: "Nephrology",
     qualification: "MD - Nephrology",
     experience: 14,
-    photo: "id 4.jpeg",
+    photo: "id 14.jpg",
     about: "Dr. Ishara focuses on kidney diseases, dialysis care, and kidney transplantation.",
     appointmentFee: 85,
     bookingDates: {
@@ -227,7 +227,7 @@ let doctorDetails = [
     specialty: "Ophthalmology",
     qualification: "MS - Ophthalmology",
     experience: 9,
-    photo: "id 2.jpg",
+    photo: "id 15.jpeg",
     about: "Dr. Malini provides treatments for vision problems, cataracts, and advanced eye care.",
     appointmentFee: 55,
     bookingDates: {
@@ -244,7 +244,7 @@ let doctorDetails = [
     specialty: "ENT",
     qualification: "MS - ENT",
     experience: 10,
-    photo: "id 3.jpeg",
+    photo: "id 10.jpg",
     about: "Dr. Suresh specializes in ear, nose, and throat treatments with both medical and surgical expertise.",
     appointmentFee: 60,
     bookingDates: {
