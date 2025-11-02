@@ -2,8 +2,7 @@
 
 🎯 Developed for **IEEE Hackelite 2.0** University Competition by **Team SAAN INNOV**  
  
-💻 GitHub Repo: https://github.com/<your-username>/HealthSync  
-
+💻 GitHub Repo:https://github.com/Sangavig22/Hospital-Booking
 ---
 
 ## 📌 Overview  
