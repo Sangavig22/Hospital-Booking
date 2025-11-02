@@ -41,6 +41,7 @@
 /* Filters Section */
 .filtersSection {
   background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
   padding: 2rem;
@@ -160,6 +161,8 @@
   justify-content: center;
   padding: 4rem 2rem;
   background: rgba(255, 255, 255, 0.95);
+  /* Ensure wider support: include WebKit-prefixed version for Safari/older toolchains */
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -194,6 +197,8 @@
   justify-content: center;
   padding: 4rem 2rem;
   background: rgba(255, 255, 255, 0.95);
+  /* Ensure wider support: include WebKit-prefixed version for Safari/older toolchains */
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -228,6 +233,8 @@
 
 .resultsHeader {
   background: rgba(255, 255, 255, 0.95);
+  /* Ensure wider support: include WebKit-prefixed version for Safari/older toolchains */
+  -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 1rem;
   padding: 1.5rem 2rem;
@@ -245,6 +252,7 @@
 /* Appointment Card */
 .appointmentCard {
   background: rgba(255, 255, 255, 0.95);
+-webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
   padding: 2rem;
@@ -335,9 +343,10 @@
 
 .appointmentDetails {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  /* reduce the minimum width for date/time/detail boxes so they appear shorter */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
 }
 
 .detailItem {
@@ -358,6 +367,12 @@
 .detailText {
   font-weight: 600;
   color: #1e293b;
+  /* keep date/time compact — truncate if too long */
+  display: block;
+  max-width: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .notes {
@@ -403,6 +418,43 @@
 .appointmentActions {
   display: flex;
   gap: 0.75rem;
+}
+
+/* Keep the actions area a stable height so showing confirmation doesn't reflow other boxes */
+.appointmentActions {
+  min-height: 40px;
+  align-items: center;
+}
+
+/* Inline confirmation row shown when the user initiates delete */
+.deleteConfirmRow {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.deleteConfirmText {
+  color: #ef4444; /* red to indicate destructive action */
+  font-weight: 700;
+  margin-right: 0.5rem;
+  white-space: nowrap;
+}
+
+/* Smaller, tighter buttons for the inline confirm so layout stays compact */
+.deleteConfirmRow .actionButton {
+  padding: 0.35rem 0.6rem;
+  font-size: 0.825rem;
+}
+
+/* Short status message shown at top of appointments content */
+.statusMessage {
+  margin: 0 0 1rem 0;
+  padding: 0.6rem 1rem;
+  background: rgba(6, 95, 70, 0.08);
+  color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.12);
+  border-radius: 0.5rem;
+  font-weight: 600;
 }
 
 .actionButton {

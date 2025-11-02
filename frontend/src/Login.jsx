@@ -52,26 +52,14 @@ useEffect(() => {
       else{
         const {data}=await axios.post(backendUrl+'/api/auth/login',{email,password})
         if (data.success) {
-          // Update AuthContext
-          login({ email, fullName: fullName || "User" }); 
+          // Update AuthContext: server does not currently return user details on login,
+          // so only store the email (don't default fullName to the literal "User").
+          login({ email });
           setToken(true); // Set token for navbar
-          
           toast.success(data.message);
           navigate("/"); 
-        }
-        
-        else{
-          const {data} = await axios.post(backendUrl+'/api/auth/login', {email, password});
-  
-          if(data.success){
-            login({ email }); // store user info
-            setToken(true); // Set token for navbar
-            toast.success(data.message);
-            navigate("/"); 
-          }
-          else{
-            toast.error(data.message);
-          }
+        } else {
+          toast.error(data.message);
         }
       }
 

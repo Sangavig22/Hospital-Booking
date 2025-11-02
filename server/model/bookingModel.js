@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
 const bookingSchema=new mongoose.Schema({
+  // Link booking to user by email so we can fetch a user's bookings later
+  email: { type: String, required: false },
   doctorId: { type: String, required: true },
   doctorName: { type: String, required: true },
    date: { type: String, required: true },   

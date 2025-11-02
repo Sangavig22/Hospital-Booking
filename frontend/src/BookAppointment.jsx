@@ -6,6 +6,7 @@ import styles from './BookAppionement.module.css';
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import {AppContent} from "./content/AppContent";
+import { useAuth } from './AuthContext';
 
 
 
@@ -57,12 +58,15 @@ const BookAppointment = () => {
   }
   const date = query.get("date");
   const time = query.get("time");
+  const rescheduleId = query.get("rescheduleId");
   const isTimeMissing = !time;
 
 
-const { backendUrl } = useContext(AppContent);
+  const { backendUrl } = useContext(AppContent);
+  const { user } = useAuth();
+
   const [form, setForm] = React.useState({
-    fullName: '',
+    fullName: user?.fullName || '',
     age: '',
     contactNo: '',
     address: ''
@@ -78,23 +82,38 @@ const { backendUrl } = useContext(AppContent);
     e.preventDefault();
     try {
       axios.defaults.withCredentials = true;
-      const { data } = await axios.post(
-        backendUrl + '/api/auth/booking',
-        {
-          fullName: form.fullName,
-          age: form.age,
-          contactNo: form.contactNo,
-          address: form.address,
+      let data;
+      if (rescheduleId) {
+        // Update existing booking instead of creating a new one
+        const resp = await axios.put(`${backendUrl}/api/auth/booking/${rescheduleId}`, {
+          date,
+          time,
           doctorId: doctor.id,
-          doctorName: doctor.name,
-          date: date,
-          time: time
-        }
-      );
+          doctorName: doctor.name
+        });
+        data = resp.data;
+      } else {
+        const resp = await axios.post(
+          backendUrl + '/api/auth/booking',
+          {
+            fullName: form.fullName,
+            age: form.age,
+            contactNo: form.contactNo,
+            address: form.address,
+            doctorId: doctor.id,
+            doctorName: doctor.name,
+            date: date,
+            time: time,
+            email: user?.email
+          }
+        );
+        data = resp.data;
+      }
       if (data.success) {
-        toast.success(data.message);
+        const successMsg = rescheduleId ? (data.message || 'Appointment rescheduled') : (data.message || 'Booking created');
+        toast.success(successMsg);
         setSubmitted(true);
-        setForm({fullName:'',age:'',contactNo:'',address:''})
+        setForm({fullName:'',age:'',contactNo:'',address:''});
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message || "Something went wrong");
@@ -143,7 +162,7 @@ const { backendUrl } = useContext(AppContent);
             Please select a time slot on the doctor page before confirming.
           </div>
         )}
-        <button type="submit" className={styles.bookButton} style={{marginTop: 10}} disabled={isTimeMissing} title={isTimeMissing ? "Select a time slot first" : undefined}>Confirm Appointment</button>
+  <button type="submit" className={styles.bookButton} style={{marginTop: 10}} disabled={isTimeMissing} title={isTimeMissing ? "Select a time slot first" : undefined}>{rescheduleId ? 'Reschedule Appointment' : 'Confirm Appointment'}</button>
       </form>
       {submitted && (
         <div className={styles.confirmMsg}>

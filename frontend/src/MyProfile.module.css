@@ -40,7 +40,7 @@
 /* Profile Header */
 .profileHeader {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+ 
   border-radius: 1.5rem;
   padding: 1rem 1.25rem;
   margin-bottom: 1rem;
@@ -159,7 +159,7 @@
 
 .profileSection {
   background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
+ 
   border-radius: 1.5rem;
   padding: 2rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);

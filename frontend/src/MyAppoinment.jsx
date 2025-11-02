@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from './AuthContext';
 import axios from 'axios';
 import { AppContent } from './content/AppContent';
+import doctorDetails from './DoctorDetail';
 import { 
   Calendar, 
   Clock, 
@@ -18,6 +19,7 @@ import {
   Filter,
   Search
 } from 'lucide-react';
+import { toast } from 'react-toastify';
 import styles from './MyAppoinment.module.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,6 +30,8 @@ const MyAppoinment = () => {
   const [appointments, setAppointments] = useState([]);
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
+  const [statusMessage, setStatusMessage] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
 
@@ -44,20 +48,25 @@ const MyAppoinment = () => {
         });
         if (!isMounted) return;
         if (data?.success) {
-          const mapped = (data.data || []).map((b, idx) => ({
-            id: b._id || idx,
-            appointmentNumber: b._id?.slice(-6)?.toUpperCase() || `APT-${String(idx + 1).padStart(3, '0')}`,
-            doctorName: b.doctorName,
-            doctorSpecialty: '',
-            doctorImage: '',
-            date: b.date,
-            time: b.time,
-            status: 'confirmed',
-            location: '',
-            notes: '',
-            duration: '',
-            price: ''
-          }));
+          const mapped = (data.data || []).map((b, idx) => {
+            // try to enrich booking with doctor info from local data
+            const doc = doctorDetails.find(d => String(d.id) === String(b.doctorId) || d.name === b.doctorName);
+            return {
+              id: b._id || idx,
+              appointmentNumber: b._id?.slice(-6)?.toUpperCase() || `APT-${String(idx + 1).padStart(3, '0')}`,
+              doctorId: b.doctorId || doc?.id || null,
+              doctorName: b.doctorName,
+              doctorSpecialty: doc?.specialty || '',
+              doctorImage: doc?.photo || '',
+              date: b.date,
+              time: b.time,
+              status: 'confirmed',
+              // Only include location/duration/price if present in doctor data or booking
+              location: doc?.clinic || b.location || '',
+              notes: b.notes || '',
+              duration: doc?.duration || b.duration || ''
+            };
+          });
           setAppointments(mapped);
           setFilteredAppointments(mapped);
         } else {
@@ -117,11 +126,61 @@ const MyAppoinment = () => {
   const getStatusText = (status) => status.charAt(0).toUpperCase() + status.slice(1);
 
   const handleReschedule = (appointmentId) => {
-    console.log('Rescheduling appointment:', appointmentId);
+    // Find the appointment object to get doctorId, date and time
+    const appt = appointments.find(a => String(a.id) === String(appointmentId)) || filteredAppointments.find(a => String(a.id) === String(appointmentId));
+    if (!appt) {
+      // fallback: just log and navigate to doctors listing
+      console.warn('Appointment not found for reschedule:', appointmentId);
+      navigate('/doctors');
+      return;
+    }
+
+    const doctorId = appt.doctorId;
+    if (!doctorId) {
+      // If we don't have an id, navigate to doctors list for user to choose
+      window.alert('Doctor information not available for this appointment. Please choose a doctor to reschedule.');
+      navigate('/doctors');
+      return;
+    }
+
+    // Navigate to the doctor's details page (time/date selection) with optional query params
+    const dateParam = appt.date ? `date=${encodeURIComponent(appt.date)}` : '';
+    const timeParam = appt.time ? `time=${encodeURIComponent(appt.time)}` : '';
+    // include appointment id so BookAppointment can update instead of creating a new booking
+    const rescheduleParam = `rescheduleId=${encodeURIComponent(appointmentId)}`;
+    const q = [dateParam, timeParam, rescheduleParam].filter(Boolean).join('&');
+    navigate(`/doctorDetails/${doctorId}${q ? `?${q}` : ''}`);
   };
 
-  const handleCancel = (appointmentId) => {
-    console.log('Cancelling appointment:', appointmentId);
+  // Start inline delete confirmation for an appointment (no browser confirm/alert)
+  const confirmDelete = async (appointmentId) => {
+      try {
+        axios.defaults.withCredentials = true;
+        const { data } = await axios.delete(`${backendUrl}/api/auth/booking/${appointmentId}`);
+        if (data?.success) {
+          // remove from local state
+          setAppointments(prev => prev.filter(a => String(a.id) !== String(appointmentId)));
+          setFilteredAppointments(prev => prev.filter(a => String(a.id) !== String(appointmentId)));
+          setStatusMessage(data.message || 'Appointment cancelled.');
+        } else {
+          setStatusMessage(data?.message || 'Unable to cancel appointment.');
+        }
+      } catch (err) {
+        console.error(err);
+        const status = err.response?.status;
+        if (status === 404) {
+          // booking already deleted on server — remove from UI and inform user
+          setAppointments(prev => prev.filter(a => String(a.id) !== String(appointmentId)));
+          setFilteredAppointments(prev => prev.filter(a => String(a.id) !== String(appointmentId)));
+          setStatusMessage('Appointment already removed.');
+        } else {
+          setStatusMessage(err.response?.data?.message || err.message || 'Server error while cancelling appointment.');
+        }
+      } finally {
+        // clear pending delete state and auto-clear status message after a short time
+    setPendingDeleteId(null);
+        setTimeout(() => setStatusMessage(''), 3500);
+      }
   };
 
   const handleDownload = (appointmentId) => {
@@ -150,7 +209,7 @@ const MyAppoinment = () => {
         </div>
       </div>
 
-      <div className={styles.appointmentDetails}>
+        <div className={styles.appointmentDetails}>
         <div className={styles.detailItem}>
           <Calendar className={styles.detailIcon} />
           <span className={styles.detailText}>{appointment.date}</span>
@@ -159,14 +218,18 @@ const MyAppoinment = () => {
           <Clock className={styles.detailIcon} />
           <span className={styles.detailText}>{appointment.time}</span>
         </div>
-        <div className={styles.detailItem}>
-          <MapPin className={styles.detailIcon} />
-          <span className={styles.detailText}>{appointment.location}</span>
-        </div>
-        <div className={styles.detailItem}>
-          <Stethoscope className={styles.detailIcon} />
-          <span className={styles.detailText}>{appointment.duration}</span>
-        </div>
+        {appointment.location && (
+          <div className={styles.detailItem}>
+            <MapPin className={styles.detailIcon} />
+            <span className={styles.detailText}>{appointment.location}</span>
+          </div>
+        )}
+        {appointment.duration && (
+          <div className={styles.detailItem}>
+            <Stethoscope className={styles.detailIcon} />
+            <span className={styles.detailText}>{appointment.duration}</span>
+          </div>
+        )}
       </div>
 
       {appointment.notes && (
@@ -175,11 +238,7 @@ const MyAppoinment = () => {
         </div>
       )}
 
-      <div className={styles.appointmentFooter}>
-        <div className={styles.priceInfo}>
-          <span className={styles.priceLabel}>Fee:</span>
-          <span className={styles.priceValue}>{appointment.price}</span>
-        </div>
+        <div className={styles.appointmentFooter}>
         
         <div className={styles.appointmentActions}>
           {appointment.status === 'completed' && (
@@ -201,13 +260,21 @@ const MyAppoinment = () => {
             </button>
           )}
           {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
-            <button 
-              className={styles.actionButton}
-              onClick={() => handleCancel(appointment.id)}
-            >
-              <Trash2 className={styles.actionIcon} />
-              Cancel
-            </button>
+            pendingDeleteId === appointment.id ? (
+              <div className={styles.deleteConfirmRow}>
+                <span className={styles.deleteConfirmText}>Confirm delete?</span>
+                <button className={styles.actionButton} onClick={() => confirmDelete(appointment.id)}>Yes, delete</button>
+                <button className={styles.actionButton} onClick={() => setPendingDeleteId(null)}>No, keep</button>
+              </div>
+            ) : (
+              <button 
+                className={styles.actionButton}
+                onClick={() => setPendingDeleteId(appointment.id)}
+              >
+                <Trash2 className={styles.actionIcon} />
+                Cancel
+              </button>
+            )
           )}
         </div>
       </div>
@@ -222,6 +289,9 @@ const MyAppoinment = () => {
       </div>
 
       <div className={styles.appointmentsContent}>
+        {statusMessage && (
+          <div className={styles.statusMessage} role="status">{statusMessage}</div>
+        )}
         {/* Filters and Search */}
         <div className={styles.filtersSection}>
           <div className={styles.searchContainer}>

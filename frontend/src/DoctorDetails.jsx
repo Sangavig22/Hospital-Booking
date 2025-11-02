@@ -49,6 +49,8 @@ const DoctorDetails = () => {
   const [selectedSlot, setSelectedSlot] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const rescheduleId = query.get('rescheduleId');
   const { user } = useAuth();
 
   const dateKeys = doctor.bookingDates ? Object.keys(doctor.bookingDates) : [];
@@ -114,7 +116,8 @@ const DoctorDetails = () => {
             <button
               className={styles.bookButton}
               onClick={() => {
-                const target = `/book/${doctor.id}?date=${encodeURIComponent(selectedDate)}&time=${encodeURIComponent(selectedSlot)}`;
+                const base = `/book/${doctor.id}?date=${encodeURIComponent(selectedDate)}&time=${encodeURIComponent(selectedSlot)}`;
+                const target = rescheduleId ? `${base}&rescheduleId=${encodeURIComponent(rescheduleId)}` : base;
                 if (!user) {
                   navigate('/login', { state: { from: location } });
                 } else {

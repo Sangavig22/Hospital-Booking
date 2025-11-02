@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, useContext } from 'react';
 import { useAuth } from './AuthContext';
 import { 
   User, 
@@ -14,6 +14,9 @@ import {
   
 } from 'lucide-react';
 import styles from './MyProfile.module.css';
+import axios from 'axios';
+import { AppContent } from './content/AppContent';
+import { toast } from 'react-toastify';
 
 const ProfileFieldItem = React.memo(function ProfileFieldItem({
   isEditing,
@@ -69,33 +72,97 @@ const MyProfile = () => {
     'medicalHistory',
     
   ], []);
-  const [profileData, setProfileData] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 (555) 123-4567',
-    address: '123 Healthcare St, Medical City, MC 12345',
-    dateOfBirth: '1990-01-15',
-    bloodType: 'O+',
-    medicalHistory: 'No known allergies. Regular checkups.',
-    insuranceProvider: 'HealthCare Plus',
-    insuranceNumber: 'HCP-123456789'
-  });
+  const emptyProfileTemplate = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    address: '',
+    dateOfBirth: '',
+    bloodType: '',
+    medicalHistory: '',
+    insuranceProvider: '',
+    insuranceNumber: ''
+  };
 
-  const [editedData, setEditedData] = useState(profileData);
+  // Helper to parse a full name into first and last parts.
+  const parseFullName = (fullName) => {
+    if (!fullName) return { firstName: '', lastName: '' };
+    const parts = fullName.trim().split(/\s+/);
+    if (parts.length === 1) return { firstName: parts[0], lastName: '' };
+    return { firstName: parts[0], lastName: parts.slice(1).join(' ') };
+  };
+
+  const [profileData, setProfileData] = useState(emptyProfileTemplate);
+
+  const [editedData, setEditedData] = useState(() => ({ ...emptyProfileTemplate }));
+
+  const { backendUrl } = useContext(AppContent);
 
   useEffect(() => {
     if (user) {
+      // Merge only available user fields into the profile template.
       const updatedData = {
+        ...emptyProfileTemplate,
         ...profileData,
-        firstName: user.firstName || user.fullName?.split(' ')[0] || 'John',
-        lastName: user.lastName || user.fullName?.split(' ')[1] || 'Doe',
-        email: user.email || 'john.doe@example.com'
+        ...(user.firstName ? { firstName: user.firstName } : {}),
+        ...(user.lastName ? { lastName: user.lastName } : {}),
+        ...(user.email ? { email: user.email } : {}),
       };
+
+      // If user has a `fullName` (or `name`/`displayName`) but not explicit first/last, attempt to split it.
+      const candidateFullName = user.fullName || user.name || user.displayName || '';
+      if ((!updatedData.firstName || !updatedData.lastName) && candidateFullName) {
+        const parsed = parseFullName(candidateFullName);
+        if (!updatedData.firstName && parsed.firstName) updatedData.firstName = parsed.firstName;
+        if (!updatedData.lastName && parsed.lastName) updatedData.lastName = parsed.lastName;
+      }
+
       setProfileData(updatedData);
-      setEditedData(updatedData);
+      setEditedData({ ...updatedData });
     }
   }, [user]);
+
+  // Load profile from backend if available
+  useEffect(() => {
+    let mounted = true;
+    const loadProfile = async () => {
+      if (!user?.email) return;
+      try {
+        axios.defaults.withCredentials = true;
+        const { data } = await axios.get(`${backendUrl}/api/auth/profile`, {
+          params: { email: user.email }
+        });
+        if (!mounted) return;
+        if (data?.success && data.data) {
+          const p = data.data;
+          const mapped = {
+            firstName: p.firstName || p.fullName?.split?.(' ')?.[0] || '',
+            lastName: p.lastName || '',
+            email: p.email || user.email,
+            phone: p.phone || '',
+            address: p.address || '',
+            dateOfBirth: p.dateOfBirth || '',
+            bloodType: p.bloodType || '',
+            medicalHistory: p.medicalHistory || '',
+          };
+          setProfileData(prev => ({ ...prev, ...mapped }));
+          setEditedData(prev => ({ ...prev, ...mapped }));
+        }
+      } catch (err) {
+        // If server returns 404 treat it as "no profile created yet" and continue silently
+        const status = err?.response?.status;
+        if (status === 404) {
+          // no profile yet for this user
+          console.debug('No saved profile found for', user?.email);
+        } else {
+          console.error('Failed to load profile', err);
+        }
+      }
+    };
+    loadProfile();
+    return () => { mounted = false; };
+  }, [user?.email, backendUrl]);
 
   const handleEdit = () => {
     setEditedData(profileData);
@@ -104,9 +171,34 @@ const MyProfile = () => {
   };
 
   const handleSave = () => {
-    setProfileData(editedData);
-    setIsEditing(false);
-    console.log('Saving profile data:', editedData);
+    // Save to backend and update UI
+    const payload = {
+      email: editedData.email || user?.email,
+      firstName: editedData.firstName,
+      lastName: editedData.lastName,
+      fullName: `${editedData.firstName || ''}${editedData.lastName ? ' ' + editedData.lastName : ''}`.trim(),
+      phone: editedData.phone,
+      address: editedData.address,
+      dateOfBirth: editedData.dateOfBirth,
+      bloodType: editedData.bloodType,
+      medicalHistory: editedData.medicalHistory
+    };
+    (async () => {
+      try {
+        axios.defaults.withCredentials = true;
+        const { data } = await axios.post(`${backendUrl}/api/auth/profile`, payload);
+        if (data?.success) {
+          setProfileData(editedData);
+          setIsEditing(false);
+          toast.success(data.message || 'Profile saved');
+        } else {
+          toast.error(data?.message || 'Failed to save profile');
+        }
+      } catch (err) {
+        console.error('Save profile error', err);
+        toast.error(err.response?.data?.message || err.message || 'Server error');
+      }
+    })();
   };
 
   const handleCancel = () => {
@@ -161,7 +253,7 @@ const MyProfile = () => {
             </div>
             <div className={styles.userMeta}>
               <h2 className={styles.userName}>
-                {profileData.firstName} {profileData.lastName}
+                {profileData.firstName}{profileData.lastName ? ` ${profileData.lastName}` : ''}
               </h2>
               <p className={styles.userEmail}>{profileData.email}</p>
             </div>
